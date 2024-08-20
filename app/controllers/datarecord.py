@@ -29,7 +29,7 @@ class DataRecord():
 
 
     def book(self,username,password):
-        # Cria uma nova conta de usuário e a adiciona à lista
+        # Cria uma nova conta de usuário e a adiciona à lista, importante pro trabalho
         new_user= UserAccount(username,password)
         self.__user_accounts.append(new_user)
         # Escreve a lista atualizada de usuários de volta no arquivo JSON

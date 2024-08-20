@@ -48,9 +48,12 @@ def action_portal():
 
 @app.route('/logout', method='POST')
 def logout():
-    ctl.logout_user()
-    response.delete_cookie('session_id')
-    redirect('/helper')
+    session_id = request.get_cookie("session_id")  # Obtém o ID da sessão atual
+    if session_id:
+        ctl.logout_user()  # Chama o método de logout para remover a sessão
+        response.delete_cookie("session_id")  # Remove o cookie de sessão do cliente
+    return redirect('/inicio')  # Redireciona para a página inicial
+
     
 
 #-----------------------------------------------------------------------------

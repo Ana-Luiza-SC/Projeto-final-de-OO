@@ -38,6 +38,8 @@ class Application():
         return template('app/views/html/portal')
     
     def pagina(self,username=None):
+            session_id = self.get_session_id()
+            username = self.__model.getUserName(session_id)
             if username is None:
                 return template('app/views/html/pagina', \
                 transfered=False)
@@ -79,6 +81,8 @@ class Application():
         return template('app/views/html/inicio')
     
     def blog(self,username=None):
+            session_id = self.get_session_id()
+            username = self.__model.getUserName(session_id)
             if username is None:
                 return template('app/views/html/blog', \
                 transfered=False)

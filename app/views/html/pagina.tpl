@@ -71,10 +71,12 @@
             font-size: 18px;
             color: #666;
         }
+        
+</style>
     </style>
 </head>
 <body>
-    <div class="navbar">
+    <div class="navbar">'
         <table>
             <tr>
                 <td class="left"><h1>Área do Usuário</h1></td>
@@ -91,6 +93,9 @@
             <h2>Dados do Usuário:</h2>
             <p>Username: {{current_user.username}}</p>
             <p>Password: {{current_user.password}}</p>
+            <form class="logout-button" action="/logout" method="post">
+                <button type="submit">Sair</button>
+            </form>
         % else:
             <h2>Houve um erro no login ou você não está autenticado.</h2>
             <a href="/portal">Faça seu login</a>
