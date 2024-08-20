@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
+    <title>Blog</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif; /* Aplica Roboto Bold ao corpo */
             margin: 0;
             padding: 0;
             background-color: #f2f2f2;
@@ -20,10 +20,12 @@
             width: 100%;
             background-color: #6c3483; /* Cor da barra superior */
             color: white;
-            height: 50px; /* Altura ajustada da barra superior */
+            height: 50px; /* Altura da barra superior */
             display: flex;
             align-items: center;
             font-family: 'Oswald', sans-serif;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
         }
 
         .navbar table {
@@ -36,7 +38,7 @@
             padding: 0 20px;
         }
 
-        .navbar h2 {
+        .navbar h1 {
             margin: 0;
             font-size: 20px; /* Tamanho da fonte ajustado */
         }
@@ -44,7 +46,7 @@
         .navbar a {
             color: white;
             text-decoration: none;
-            padding: 10px 20px; /* Padding ajustado */
+            padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s;
             display: inline-block;
@@ -59,12 +61,10 @@
         .content {
             padding-top: 60px; /* Para evitar que o conteúdo fique sob a navbar */
             text-align: center;
-            margin-top: 100px;
         }
 
-        .content h1 {
-            color: #003366;
-            font-size: 36px;
+        .content h2 {
+            color: #6c3483;
         }
 
         .content p {
@@ -77,15 +77,23 @@
     <div class="navbar">
         <table>
             <tr>
-                <td><h2>Página Princial</h2></td>
-                <td style="text-align: right;"><a href="/portal">Login</a></td>
+                <td class="left"><h1>Área do Usuário</h1></td>
+                <td class="right" align="right">
+                <a href="/inicio">Página inicial</a>
+                <a href="/pagina">Área de usuário</a>
+                </td>
             </tr>
         </table>
     </div>
 
     <div class="content">
-        <h1>Bem-vindo à Página Inicial</h1>
-        <p>Clique em "Login" no canto superior direito para acessar sua conta.</p>
+        % if transfered: 
+            <h2>área do blog</h2>
+            <p>Aqui deve ser colocado os títulos dos post</p>
+        % else: 
+            <h2>Houve erro no login do usuário :(</h2>
+            <a href="/portal">Faça seu login</a>
+        % end 
     </div>
 </body>
 </html>

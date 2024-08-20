@@ -8,7 +8,8 @@ class Application():
         self.pages = {
     'pagina': self.pagina,
     'portal': self.portal,
-    'inicio': self.inicio
+    'inicio': self.inicio,
+    'blog':self.blog
 }
          # Instancia o modelo DataRecord, que gerencia usuários e sessões
         self.__model = DataRecord()
@@ -76,6 +77,17 @@ class Application():
             
     def inicio(self):
         return template('app/views/html/inicio')
+    
+    def blog(self,username=None):
+            if username is None:
+                return template('app/views/html/blog', \
+                transfered=False)
+            elif self.is_authenticated(username):
+                return template('app/views/html/blog', \
+                transfered=True)
+            else:
+                return template('app/views/html/blog', \
+                transfered=False)
     
     
 

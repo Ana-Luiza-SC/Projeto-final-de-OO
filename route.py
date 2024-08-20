@@ -41,10 +41,11 @@ def action_portal():
     if auth_result is not None: 
         session_id, username = auth_result
         response.set_cookie('session_id', session_id, httponly=True, secure=True, max_age=3600)
-        redirect(f'/pagina/{username}')
+        redirect(f'/blog/{username}')
     else: 
         return redirect('/portal')
-    
+
+
 @app.route('/logout', method='POST')
 def logout():
     ctl.logout_user()
@@ -58,6 +59,14 @@ def logout():
 @app.route('/inicio', method=['GET', 'POST'])
 def inicio():
     return ctl.render('inicio')
+
+@app.route('/blog', methods=['GET']) ## criar uma página com as mesmas verificações da página 
+@app.route('/blog/<username>', methods=['GET'])
+def action_blog(username=None):
+    if not username:
+        return ctl.render('blog')
+    else:
+        return ctl.render('blog', username)
 
 
 

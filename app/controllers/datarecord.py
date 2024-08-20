@@ -59,7 +59,8 @@ class DataRecord():
         for session_id in self.__authenticated_users:
             if username == self.__authenticated_users[session_id].username:
                 return session_id
-        return None  # Retorna None se o usuário não for encontrado
+        return None
+
 
 
     def checkUser(self, username, password):

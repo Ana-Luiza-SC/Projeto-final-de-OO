@@ -46,7 +46,6 @@
         .navbar a {
             color: white;
             text-decoration: none;
-            background-color: #5216d2; /* Cor do botão de login */
             padding: 10px 20px; /* Padding ajustado */
             border-radius: 5px;
             transition: background-color 0.3s;
@@ -56,7 +55,7 @@
         }
 
         .navbar a:hover {
-            background-color: #6c3483; /* Cor do botão ao passar o mouse */
+            background-color: #4a235a; /* Cor do botão ao passar o mouse */
         }
 
 

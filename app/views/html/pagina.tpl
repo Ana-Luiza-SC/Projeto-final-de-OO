@@ -46,7 +46,6 @@
         .navbar a {
             color: white;
             text-decoration: none;
-            background-color: #5216d2; /* Cor do botão de ir para o portal */
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s;
@@ -56,7 +55,7 @@
         }
 
         .navbar a:hover {
-            background-color: #6c3483; /* Cor do botão ao passar o mouse */
+            background-color: #4a235a; /* Cor do botão ao passar o mouse */
         }
 
         .content {
@@ -79,19 +78,23 @@
         <table>
             <tr>
                 <td class="left"><h1>Área do Usuário</h1></td>
-                <td class="right" align="right"><a href="/portal">Ir para o portal</a></td>
+                <td class="right" align="right">
+                    <a href="/inicio">Página inicial</a>
+                    <a href="/blog">Blog</a>
+                </td>
             </tr>
         </table>
     </div>
 
     <div class="content">
-        % if transfered: 
+        % if transfered:
             <h2>Dados do Usuário:</h2>
             <p>Username: {{current_user.username}}</p>
             <p>Password: {{current_user.password}}</p>
-        % else: 
-            <h2>Houve erro no login do usuário :(</h2>
-        % end 
+        % else:
+            <h2>Houve um erro no login ou você não está autenticado.</h2>
+            <a href="/portal">Faça seu login</a>
+        % end
     </div>
 </body>
 </html>
