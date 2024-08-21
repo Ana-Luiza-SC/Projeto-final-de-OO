@@ -93,6 +93,7 @@
             <h2>Dados do Usuário:</h2>
             <p>Username: {{current_user.username}}</p>
             <p>Password: {{current_user.password}}</p>
+            <p>idade: {{current_user.age}}</p>
             <form class="logout-button" action="/logout" method="post">
                 <button type="submit">Sair</button>
             </form>
