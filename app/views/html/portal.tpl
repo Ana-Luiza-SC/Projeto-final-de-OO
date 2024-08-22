@@ -121,7 +121,7 @@
         <form action="/portal" method="post">
             <label for="username">Nome:</label> 
             <input id="username" name="username" type="text" required />
-
+            
             <label for="password">Senha:</label>
             <input id="password" name="password" type="password" required />
 

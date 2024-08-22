@@ -70,6 +70,23 @@ def action_blog(username=None):
         return ctl.render('blog')
     else:
         return ctl.render('blog', username)
+    
+@route('/cadastro', method=['GET'])
+def cadastro():
+    print('1')
+    return ctl.render('cadastro') ## isso deveria ir pro render e o render mandar para o cadastro
+    ##mas em eventuais depurações ele não está fazendo isso
+
+@route('/cadastro', method=['POST'])
+def action_cadastro():
+    ## deveria pegar as informações do formulario, mandar para a função no aplicattion, e ela mandar para o data record botar no json
+    username = request.forms.get('username')
+    password = request.forms.get('password')
+    name = request.forms.get('name')
+    age = request.forms.get('age')
+    email = request.forms.get('email')
+    ctl.action_book(username, password, name, age, email)
+    template('app/views/html/portal')
 
 
 

@@ -28,9 +28,9 @@ class DataRecord():
             self.__user_accounts.append(UserAccount('Guest', '010101','101010'))
 
 
-    def book(self,username,password):
+    def book(self,username,password, name, age, email):
         # Cria uma nova conta de usuário e a adiciona à lista, importante pro trabalho
-        new_user= UserAccount(username,password)
+        new_user = UserAccount(username, password, name, age, email)
         self.__user_accounts.append(new_user)
         # Escreve a lista atualizada de usuários de volta no arquivo JSON
         with open("app/controllers/db/user_accounts.json", "w") as arquivo_json:
