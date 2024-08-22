@@ -1,5 +1,5 @@
 from bottle import template,request
-from app.controllers.datarecord import DataRecord
+from app.controllers.datarecord import DataRecord, Post 
 
 class Application():
 
@@ -13,6 +13,7 @@ class Application():
 }
          # Instancia o modelo DataRecord, que gerencia usuários e sessões
         self.__model = DataRecord()
+        self.__ana = Post()
 
 
     def render(self,page,parameter = None):
@@ -87,8 +88,9 @@ class Application():
                 return template('app/views/html/blog', \
                 transfered=False)
             elif self.is_authenticated(username):
+                ana = self.__ana.get_posts()
                 return template('app/views/html/blog', \
-                transfered=True)
+                transfered=True, current_post = ana)
             else:
                 return template('app/views/html/blog', \
                 transfered=False)

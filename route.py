@@ -1,10 +1,12 @@
 from app.controllers.application import Application
+from app.controllers.datarecord import DataRecord, Post 
 from bottle import Bottle, route, run, request, static_file
 from bottle import redirect, template, response
 
 
 app = Bottle()
 ctl = Application()
+pst = Post()
 
 
 #-----------------------------------------------------------------------------
@@ -26,11 +28,9 @@ def action_pagina(username=None):
     else:
         return ctl.render('pagina', username)
 
-
 @app.route('/portal', method='GET')
 def login():
     return ctl.render('portal')
-
 
 @app.route('/portal', method='POST')
 def action_portal(): 
@@ -44,7 +44,6 @@ def action_portal():
         redirect(f'/blog/{username}')
     else: 
         return redirect('/portal')
-
 
 @app.route('/logout', method='POST')
 def logout():
@@ -63,20 +62,11 @@ def logout():
 def inicio():
     return ctl.render('inicio')
 
-@app.route('/blog', methods=['GET']) ## criar uma página com as mesmas verificações da página 
+@app.route('/blog', methods=['GET']) 
 @app.route('/blog/<username>', methods=['GET'])
 def action_blog(username=None):
-    if not username:
-        return ctl.render('blog')
-    else:
-        return ctl.render('blog', username)
-
-
-
-
-#-----------------------------------------------------------------------------
-
+    posts = pst.get_posts()  # Aqui você deve chamar o método que retorna os posts
+    return ctl.render('blog', username)
 
 if __name__ == '__main__':
-
     run(app, host='localhost', port=8080, debug=True)
