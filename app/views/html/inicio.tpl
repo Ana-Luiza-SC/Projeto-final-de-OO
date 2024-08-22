@@ -78,7 +78,10 @@
         <table>
             <tr>
                 <td><h2>Página Princial</h2></td>
-                <td style="text-align: right;"><a href="/portal">Login</a></td>
+                <td style="text-align: right;">
+                <a href="/portal">Login</a>
+                <a href="/cadastro">Cadastre-se</a>
+                </td>
             </tr>
         </table>
     </div>

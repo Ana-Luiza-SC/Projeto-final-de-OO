@@ -1,10 +1,12 @@
 
 
 class UserAccount():
-    def __init__(self, username, password,age):
+    def __init__(self, username, password,name, age, email):
         self.username= username
         self.password= password
+        self.name = age
         self.age = age
+        self.email= email
 
 class text():
     def __init__(self,autor,titulo,conteudo):

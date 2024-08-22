@@ -71,6 +71,19 @@ def action_blog(username=None):
     else:
         return ctl.render('blog', username)
 
+@route('/cadastro', method='GET')
+def cadastro():
+    return ctl.render('cadastro')
+
+@route('/cadastro', method='POST')
+def action_cadastro():
+    username = request.forms.get('username')
+    password = request.forms.get('password')
+    name = request.forms.get('name')
+    age = request.forms.get('age')
+    email = request.forms.get('email')
+    
+    ctl.action_book(username, password, name, age, email)
 
 
 
