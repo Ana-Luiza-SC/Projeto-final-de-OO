@@ -51,10 +51,14 @@ def logout():
     if session_id:
         ctl.logout_user()  # Chama o método de logout para remover a sessão
         response.delete_cookie("session_id")  # Remove o cookie de sessão do cliente
-    return redirect('/inicio')  # Redireciona para a página inicial
+    return redirect('/')  # Redireciona para a página inicial
 
+    
 
-@app.route('/inicio', method=['GET', 'POST'])
+#-----------------------------------------------------------------------------
+# Suas rotas aqui:
+
+@app.route('/', method=['GET', 'POST'])
 def inicio():
     return ctl.render('inicio')
 
@@ -63,23 +67,6 @@ def inicio():
 def action_blog(username=None):
     posts = pst.get_posts()  # Aqui você deve chamar o método que retorna os posts
     return ctl.render('blog', username)
-    
-@route('/cadastro', method=['GET'])
-def cadastro():
-    print('1')
-    return ctl.render('cadastro') ## isso deveria ir pro render e o render mandar para o cadastro
-    ##mas em eventuais depurações ele não está fazendo isso
-
-@route('/cadastro', method=['POST'])
-def action_cadastro():
-    ## deveria pegar as informações do formulario, mandar para a função no aplicattion, e ela mandar para o data record botar no json
-    username = request.forms.get('username')
-    password = request.forms.get('password')
-    name = request.forms.get('name')
-    age = request.forms.get('age')
-    email = request.forms.get('email')
-    ctl.action_book(username, password, name, age, email)
-    template('app/views/html/portal')
 
 @app.route('/cadastro', method='GET')
 def cadastro():
@@ -95,9 +82,6 @@ def action_cadastro():
     
     ctl.action_book(username, password, name, age, email)
     redirect(f'/portal')
-
-
-
 
 
 if __name__ == '__main__':
