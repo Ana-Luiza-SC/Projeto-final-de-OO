@@ -115,9 +115,11 @@
     <div class="navbar">
         <table>
             <tr>
-                <td class="left"><h1>Cadastro</h1></td>
-                <td class="right" align="right">
-                    <a href="/inicio">Página inicial</a>
+                <td><h2>Página Princial</h2></td>
+                
+                <td style="text-align: right;">
+                <a href="/">Página inicial</a>
+                <a href="/portal">Login</a>
                 </td>
             </tr>
         </table>
@@ -126,12 +128,6 @@
     <div class="content">
         <div class="form-container">
             <h2>Crie uma nova conta</h2>
-<<<<<<< HEAD
-            % if error:
-                <p class="error">{{error}}</p>
-            % end
-=======
->>>>>>> cadastro_usuario
             <form action="/cadastro" method="post">
                 <div class="form-group">
                     <label for="username">Nome de usuário:</label>
