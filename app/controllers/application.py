@@ -10,7 +10,7 @@ class Application():
     'portal': self.portal,
     'inicio': self.inicio,
     'blog':self.blog,
-    'cadastro':self.cadastro
+    'cadastro': self.cadastro
 }
          # Instancia o modelo DataRecord, que gerencia usuários e sessões
         self.__model = DataRecord()
@@ -74,7 +74,7 @@ class Application():
     
     def logout_user(self):
         # Limpa o username atual e efetua o logout no modelo
-        self.current_username = None
+        self._current_username = None
         session_id = self.get_session_id()
         if session_id:
             self.__model.logout(session_id)
@@ -96,9 +96,22 @@ class Application():
                 return template('app/views/html/blog', \
                 transfered=False)
     
-
     def cadastro(self):
         return template('app/views/html/cadastro')
 
     def action_book(self, username, password, name, age, email):
         self.__model.book(username, password, name, age, email)
+    
+    
+
+"""
+O sistema de login do seu projeto funciona utilizando sessões baseadas em cookies. Quando um usuário faz login, o sistema verifica as 
+credenciais (nome de usuário e senha) e, se forem válidas, gera um session_id único, que é armazenado como um cookie no navegador do usuário. 
+Esse session_id é usado para identificar o usuário em solicitações futuras e para mostrar informações personalizadas, como o nome de usuário 
+na página.
+
+Se as informações não aparecem em outro navegador, isso ocorre porque os cookies (incluindo o session_id) são específicos para cada navegador.
+Quando você abre um novo navegador, ele não possui o cookie com o session_id do usuário autenticado no primeiro navegador, então o sistema não 
+reconhece que esse usuário já está logado, e as informações personalizadas não são exibidas. Para acessar as informações em outro navegador, 
+o usuário precisaria fazer login novamente.
+"""
