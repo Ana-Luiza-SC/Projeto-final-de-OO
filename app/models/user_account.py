@@ -1,4 +1,4 @@
-
+from datetime import datetime
 
 class UserAccount():
     def __init__(self, username, password,name, age, email):
@@ -13,13 +13,11 @@ class text():
         self.autor = autor
         self.titulo = titulo
         self.conteudo = conteudo
-        
-        
+          
 class post(text):
-        def __init__(self, autor, titulo, conteudo,data, curtidas):
+        def __init__(self, autor, titulo, conteudo, data):
              super().__init__(autor, titulo, conteudo)
              self.data = data
-             self.curtidas = curtidas
              
 class comentario(text):
         def __init__(self, autor, titulo, conteudo, verificado):

@@ -79,8 +79,8 @@
             <tr>
                 <td class="left"><h1>Área do Usuário</h1></td>
                 <td class="right" align="right">
-                <a href="/inicio">Página inicial</a>
-                <a href="/pagina">Área de usuário</a>
+                    <a href="/inicio">Página inicial</a>
+                    <a href="/pagina">Área de usuário</a> 
                 </td>
             </tr>
         </table>
@@ -88,10 +88,17 @@
 
     <div class="content">
         % if transfered: 
-            <h2>área do blog</h2>
-            <p>Aqui deve ser colocado os títulos dos post</p>
+            <h2>Área do Blog</h2>
+                <article>
+                    % for post in current_post:
+                        <h2>{{ post['titulo'] }}</h2>  <!-- Acessando a chave 'titulo' de um dicionário -->
+                        <p>{{ post['conteudo'] }}</p>
+                        <p>Autor: {{ post['autor'] }}</p>
+                        <p>Data: {{ post['data'] }}</p>
+                    % end
+                </article>
         % else: 
-            <h2>Houve erro no login do usuário :(</h2>
+            <h2>Houve erro no login do usuário</h2>
             <a href="/portal">Faça seu login</a>
         % end 
     </div>

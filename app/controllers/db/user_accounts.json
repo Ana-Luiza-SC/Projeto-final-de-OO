@@ -1,12 +1,1 @@
-
-[{"username": "Henrique",
- "password": "123456",
-"name":"Henrique Moura",
-"age":"27",
-"email":"naosei@unb.br"},
-{"username": "Moura",
- "password": "456789",
-"name":"Henrique Moura",
-"age":"27",
-"email":"naosei@unb.br"}
-]
+[{"username": "Henrique", "password": "123456","age": "123"},{"username": "Moura", "password": "456789","age":"5"}]
