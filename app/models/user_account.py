@@ -1,5 +1,3 @@
-from datetime import datetime
-
 class UserAccount():
     def __init__(self, username, password,name, age, email):
         self.username= username
