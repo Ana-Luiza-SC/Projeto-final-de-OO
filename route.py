@@ -54,10 +54,6 @@ def logout():
         response.delete_cookie("session_id")  # Remove o cookie de sessão do cliente
     return redirect('/inicio')  # Redireciona para a página inicial
 
-    
-
-#-----------------------------------------------------------------------------
-# Suas rotas aqui:
 
 @app.route('/inicio', method=['GET', 'POST'])
 def inicio():
@@ -87,6 +83,21 @@ def action_cadastro():
     email = request.forms.get('email')
     ctl.action_book(username, password, name, age, email)
     template('app/views/html/portal')
+
+@app.route('/cadastro', method='GET')
+def cadastro():
+    return ctl.render('cadastro')
+
+@app.route('/cadastro', method='POST')
+def action_cadastro():
+    username = request.forms.get('username')
+    password = request.forms.get('password')
+    name = request.forms.get('name')
+    age = request.forms.get('age')
+    email = request.forms.get('email')
+    
+    ctl.action_book(username, password, name, age, email)
+    redirect(f'/portal')
 
 
 

@@ -93,14 +93,10 @@ class Application():
             else:
                 return template('app/views/html/blog', \
                 transfered=False)
-                
-    def cadastro(self):
-        print('2')
-        return template('app/views/html/cadastro') ## deveria ir pro arquivo cadastro.tpl
-
-    def action_book(self, username, password, name, age, email): ##deveria criar o usuario pela função datarecord
-        print('4')
-        self.__model.book(username, password, name, age, email)
-
-
     
+
+    def cadastro(self):
+        return template('app/views/html/cadastro')
+
+    def action_book(self, username, password, name, age, email):
+        self.__model.book(username, password, name, age, email)
