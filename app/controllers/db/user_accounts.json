@@ -1,1 +1,2 @@
-[{"username": "Henrique", "password": "123456","age": "123"},{"username": "Moura", "password": "456789","age":"5"}]
+[{"username": "Henrique", "password": "123456", "name": "123", "age": "123", "email": "naosei@haha.br"},
+ {"username": "Moura", "password": "456789", "name": "123", "age": "123", "email": "naosei@hahaha.br"}]
