@@ -69,7 +69,7 @@
 
         .content p {
             font-size: 18px;
-            color: #666; 
+            color: #666;
         }
     </style>
 </head>
@@ -77,14 +77,11 @@
     <div class="navbar">
         <table>
             <tr>
-                <td><h2>Página Princial</h2></td>
+                <td><h2>Página Inicial</h2></td>
+                
                 <td style="text-align: right;">
                 <a href="/portal">Login</a>
-<<<<<<< HEAD
-                <a href="/cadastro">Cadastro</a>
-=======
                 <a href="/cadastro">Cadastre-se</a>
->>>>>>> cadastro_usuario
                 </td>
             </tr>
         </table>
