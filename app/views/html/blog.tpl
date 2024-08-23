@@ -77,9 +77,8 @@
     <div class="navbar">
         <table>
             <tr>
-                <td class="left"><h1>Área do Usuário</h1></td>
+                <td class="left"><h1>Área do Blog</h1></td>
                 <td class="right" align="right">
-                    <a href="/inicio">Página inicial</a>
                     <a href="/pagina">Área de usuário</a> 
                 </td>
             </tr>
