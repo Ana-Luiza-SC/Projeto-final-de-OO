@@ -126,9 +126,6 @@
     <div class="content">
         <div class="form-container">
             <h2>Crie uma nova conta</h2>
-            % if error:
-                <p class="error">{{error}}</p>
-            % end
             <form action="/cadastro" method="post">
                 <div class="form-group">
                     <label for="username">Nome de usuário:</label>

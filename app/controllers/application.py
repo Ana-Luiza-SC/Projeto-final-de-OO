@@ -10,7 +10,8 @@ class Application():
     'portal': self.portal,
     'inicio': self.inicio,
     'blog':self.blog,
-    'cadastro': self.cadastro
+    'cadastro': self.cadastro,
+    'sim': self.sim
 }
          # Instancia o modelo DataRecord, que gerencia usuários e sessões
         self.__model = DataRecord()
@@ -37,6 +38,9 @@ class Application():
 
     def portal(self):
         return template('app/views/html/portal')
+    
+    def sim(self):
+        return template('app/views/html/sim')
     
     def pagina(self,username=None):
             session_id = self.get_session_id()

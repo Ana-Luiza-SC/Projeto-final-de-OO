@@ -91,9 +91,11 @@
     <div class="content">
         % if transfered:
             <h2>Dados do Usuário:</h2>
-            <p>Username: {{current_user.username}}</p>
-            <p>Password: {{current_user.password}}</p>
-            <p>idade: {{current_user.age}}</p>
+            <p>Nome: {{current_user.name}}</p>
+            <p>Nome de usuário: {{current_user.username}}</p>
+            <p>Senha: {{current_user.password}}</p>
+            <p>Idade: {{current_user.age}}</p>
+            <p>Email: {{current_user.email}}</p>
             <form class="logout-button" action="/logout" method="post">
                 <button type="submit">Sair</button>
             </form>

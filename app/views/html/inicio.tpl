@@ -69,7 +69,7 @@
 
         .content p {
             font-size: 18px;
-            color: #666;
+            color: #666; 
         }
     </style>
 </head>
