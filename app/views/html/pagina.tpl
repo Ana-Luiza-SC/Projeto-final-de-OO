@@ -76,12 +76,11 @@
     </style>
 </head>
 <body>
-    <div class="navbar">'
+    <div class="navbar">
         <table>
             <tr>
                 <td class="left"><h1>Área do Usuário</h1></td>
                 <td class="right" align="right">
-                    <a href="/inicio">Página inicial</a>
                     <a href="/blog">Blog</a>
                 </td>
             </tr>
@@ -91,17 +90,12 @@
     <div class="content">
         % if transfered:
             <h2>Dados do Usuário:</h2>
-<<<<<<< HEAD
-            <p>Nome de usuário: {{current_user.username}}</p>
-            <p>Senha: {{current_user.password}}</p>
-            <p>Nome: {{current_user.name}}</p>
-=======
-            <p>Nome: {{current_user.name}}</p>
-            <p>Nome de usuário: {{current_user.username}}</p>
-            <p>Senha: {{current_user.password}}</p>
->>>>>>> cadastro_usuario
-            <p>Idade: {{current_user.age}}</p>
-            <p>Email: {{current_user.email}}</p>
+            <p>Username: {{current_user.username}}</p>
+            <p>Password: {{current_user.password}}</p>
+            <p>Password: {{current_user.name}}</p>
+            <p>Password: {{current_user.age}}</p>
+            <p>Password: {{current_user.email}}</p>
+            <p>idade: {{current_user.age}}</p>
             <form class="logout-button" action="/logout" method="post">
                 <button type="submit">Sair</button>
             </form>
