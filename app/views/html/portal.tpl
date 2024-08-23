@@ -58,6 +58,21 @@
             background-color: #4a235a; /* Cor do botão ao passar o mouse */
         }
 
+        .content {
+            padding-top: 60px; /* Para evitar que o conteúdo fique sob a navbar */
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .content h1 {
+            color: #003366;
+            font-size: 36px;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #666;
+        }
 
         .login-container {
             background-color: white;
@@ -110,8 +125,12 @@
     <div class="navbar">
         <table>
             <tr>
-                <td class="left"><h2>Sistema de Login</h2></td>
-                <td class="right" align="right"><a href="/inicio" style="color: white; text-decoration: none; font-family: 'Oswald', sans-serif;">Início</a></td>
+                <td><h2>Página Princial</h2></td>
+
+                <td style="text-align: right;">
+                <a href="/">Página inicial</a>
+                <a href="/cadastro">Cadastre-se</a>
+                </td>
             </tr>
         </table>
     </div>
@@ -121,7 +140,7 @@
         <form action="/portal" method="post">
             <label for="username">Nome:</label> 
             <input id="username" name="username" type="text" required />
-            
+
             <label for="password">Senha:</label>
             <input id="password" name="password" type="password" required />
 
