@@ -2,11 +2,11 @@ from app.controllers.application import Application
 from app.controllers.datarecord import DataRecord, Post 
 from bottle import Bottle, route, run, request, static_file
 from bottle import redirect, template, response
+from datetime import date
 
 
 app = Bottle()
 ctl = Application()
-pst = Post()
 
 
 #-----------------------------------------------------------------------------
@@ -41,7 +41,7 @@ def action_portal():
     if auth_result is not None: 
         session_id, username = auth_result
         response.set_cookie('session_id', session_id, httponly=True, secure=True, max_age=3600)
-        redirect(f'/blog/{username}')
+        redirect(f'/blog')
     else: 
         return redirect('/portal')
 
@@ -62,11 +62,10 @@ def logout():
 def inicio():
     return ctl.render('inicio')
 
-@app.route('/blog', methods=['GET']) 
-@app.route('/blog/<username>', methods=['GET'])
-def action_blog(username=None):
-    posts = pst.get_posts()  # Aqui você deve chamar o método que retorna os posts
-    return ctl.render('blog', username)
+@app.route('/blog', method=['GET', 'POST'])
+def blog():
+    return ctl.render('blog')
+
 
 @app.route('/cadastro', method='GET')
 def cadastro():
@@ -82,6 +81,25 @@ def action_cadastro():
     
     ctl.action_book(username, password, name, age, email)
     redirect(f'/portal')
+
+@app.route('/novo_post', method='GET')
+def novo_post():
+    return ctl.render('novo_post')
+
+@app.route('/novo_post', method='POST')
+def action_novo_post():
+    autor = request.forms.get('Autor')
+    titulo = request.forms.get('Titulo')
+    conteudo = request.forms.get('Conteudo')
+    data = date.today().strftime('%Y-%m-%d')
+    
+    if not autor or not titulo or not conteudo:
+        return "Todos os campos são obrigatórios."
+
+    ctl.action_post(autor, titulo, conteudo, data)
+    return redirect('/blog')
+
+    
 
 
 if __name__ == '__main__':

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Novo Post</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -38,7 +38,7 @@
             padding: 0 20px;
         }
 
-        .navbar h1 {
+        .navbar h2 {
             margin: 0;
             font-size: 20px;
         }
@@ -86,11 +86,16 @@
             font-weight: bold;
         }
 
-        .form-group input {
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 150px;
         }
 
         .form-group input[type="submit"] {
@@ -115,11 +120,10 @@
     <div class="navbar">
         <table>
             <tr>
-                <td><h2>Cadastro de Usuário</h2></td>
-                
+                <td><h2>criação de novos posts</h2></td>
                 <td style="text-align: right;">
-                <a href="/">Página inicial</a>
-                <a href="/portal">Login</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/pagina">Página de Usuário</a>
                 </td>
             </tr>
         </table>
@@ -128,31 +132,19 @@
     <div class="content">
         <div class="form-container">
             <h2>Crie uma nova conta</h2>
-            <form action="/cadastro" method="post">
-                <div class="form-group">
-                    <label for="username">Nome de usuário:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="age">Idade:</label>
-                    <input type="number" id="age" name="age" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Cadastrar">
-                </div>
+            <form action="/novo_post" method="POST">
+                <label for="autor">Autor:</label>
+                <input type="text" id="autor" name="Autor">
+                
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="Titulo">
+                
+                <label for="conteudo">Conteúdo:</label>
+                <textarea id="conteudo" name="Conteudo"></textarea>
+                
+                <input type="submit" value="Publicar">
             </form>
+
         </div>
     </div>
 </body>
