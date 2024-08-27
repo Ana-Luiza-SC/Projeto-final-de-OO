@@ -7,42 +7,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif; /* Aplica Roboto Bold ao corpo */
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f2f2f2;
         }
-
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #6c3483; /* Cor da barra superior */
+            background-color: #6c3483;
             color: white;
-            height: 50px; /* Altura da barra superior */
+            height: 50px;
             display: flex;
             align-items: center;
             font-family: 'Oswald', sans-serif;
             padding: 0 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .navbar table {
             width: 100%;
             border-collapse: collapse;
         }
-
         .navbar td {
             vertical-align: middle;
             padding: 0 20px;
         }
-
         .navbar h1 {
             margin: 0;
-            font-size: 20px; /* Tamanho da fonte ajustado */
+            font-size: 20px;
         }
-
         .navbar a {
             color: white;
             text-decoration: none;
@@ -50,26 +45,67 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             display: inline-block;
-            line-height: 30px; /* Alinhamento vertical ajustado */
-            font-size: 16px; /* Tamanho da fonte do botão ajustado */
+            line-height: 30px;
+            font-size: 16px;
         }
-
         .navbar a:hover {
-            background-color: #4a235a; /* Cor do botão ao passar o mouse */
+            background-color: #4a235a;
         }
 
         .content {
-            padding-top: 60px; /* Para evitar que o conteúdo fique sob a navbar */
+            padding-top: 100px; /* Adiciona espaçamento suficiente para que o conteúdo não fique oculto */
             text-align: center;
         }
 
         .content h2 {
-            color: #6c3483;
+            color: #4a235a;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-family: 'Oswald', sans-serif;
+            text-align: center; 
         }
 
+        .content h3 {
+            color: #4a235a;
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-family: 'Oswald', sans-serif;
+            text-align: center; 
+        }
+
+        /* Estilização para o conteúdo dos posts */
         .content p {
             font-size: 18px;
             color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center; 
+        }
+        
+        
+        .content .button-center {
+            display: flex; /* Usa flexbox para centralizar o botão */
+            justify-content: center; /* Centraliza horizontalmente */
+            margin: 20px 0; /* Espaçamento vertical */
+        }
+
+        /* Estilização para o link de criação de novos posts */
+        .content a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6c3483;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            margin: 20px auto;
+            text-align: center; 
+        }
+
+        .content a:hover {
+            background-color: #4a235a;
         }
     </style>
 </head>
@@ -79,27 +115,38 @@
             <tr>
                 <td class="left"><h1>Área do Blog</h1></td>
                 <td class="right" align="right">
-                    <a href="/pagina">Área de usuário</a> 
+                    <a href="/pagina">Área de usuário</a>
                 </td>
             </tr>
         </table>
     </div>
 
     <div class="content">
-        % if transfered: 
-            <h2>Área do Blog</h2>
-                <article>
-                    % for post in current_post:
-                        <h2>{{ post['titulo'] }}</h2>  <!-- Acessando a chave 'titulo' de um dicionário -->
+        % if transfered == True: 
+            % if current_user.type == "adm":
+                <h2>Você é um adm</h2>  <!-- O adm tem direito a fazer novos posts -->
+                <p>Se você quiser criar novo post acesse o seguinte link:</p>
+                <div class="button-center">
+                    <a href="/novo_post">Novos posts</a>
+                </div>
+
+            % end
+            <h2>Área do blog</h2>
+            <article>
+                % for post in current_post:
+                        <h3>{{ post['titulo'] }}</h3>  <!-- Acessando a chave 'titulo' de um dicionário -->
                         <p>{{ post['conteudo'] }}</p>
                         <p>Autor: {{ post['autor'] }}</p>
                         <p>Data: {{ post['data'] }}</p>
                     % end
-                </article>
+            </article>
+            % if current_user.type == "adm":
+                <h2>Você é um adm</h2>
+            % end
         % else: 
             <h2>Houve erro no login do usuário</h2>
             <a href="/portal">Faça seu login</a>
-        % end 
+        % end
     </div>
 </body>
 </html>

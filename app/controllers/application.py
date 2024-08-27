@@ -10,11 +10,12 @@ class Application():
     'portal': self.portal,
     'inicio': self.inicio,
     'blog':self.blog,
-    'cadastro': self.cadastro
+    'cadastro': self.cadastro,
+    'novo_post':self.novo_post
 }
          # Instancia o modelo DataRecord, que gerencia usuários e sessões
         self.__model = DataRecord()
-        self.__ana = Post()
+        self.__posts = Post()
 
 
     def render(self,page,parameter = None):
@@ -89,9 +90,11 @@ class Application():
                 return template('app/views/html/blog', \
                 transfered=False)
             elif self.is_authenticated(username):
-                ana = self.__ana.get_posts()
+                post = self.__posts.get_posts() #manda os post disponíveis
+                session_id= self.get_session_id() #manda o usuário disponível
+                user = self.__model.getCurrentUser(session_id)
                 return template('app/views/html/blog', \
-                transfered=True, current_post = ana)
+                transfered=True, current_post = post, current_user = user)
             else:
                 return template('app/views/html/blog', \
                 transfered=False)
@@ -100,7 +103,15 @@ class Application():
         return template('app/views/html/cadastro')
 
     def action_book(self, username, password, name, age, email):
-        self.__model.book(username, password, name, age, email)
+        self.__model.book(username, password, name, age, email, type = "user")
+        
+    def novo_post(self):
+        return template('app/views/html/novo_post')
+    
+    def action_post(self,autor, titulo, conteudo, data):
+        self.__posts.criar_post(autor, titulo, conteudo, data)
+        
+
     
     
 

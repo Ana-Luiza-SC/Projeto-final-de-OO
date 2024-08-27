@@ -1,2 +1,26 @@
-[{"username": "Henrique", "password": "123456", "name": "123", "age": "123", "email": "naosei@haha.br"},
- {"username": "Moura", "password": "456789", "name": "123", "age": "123", "email": "naosei@hahaha.br"}]
+[
+    {
+        "username": "Henrique",
+        "password": "123456",
+        "name": "Henrique Moura",
+        "age": "123",
+        "email": "naosei@haha.br",
+        "type": "user"
+    },
+    {
+        "username": "Moura",
+        "password": "456789",
+        "name": "123",
+        "age": "123",
+        "email": "naosei@hahaha.br",
+        "type": "user"
+    },
+    {
+        "username": "Ana",
+        "password": "1",
+        "name": "0",
+        "age": "5",
+        "email": "naosei@hahaha.br",
+        "type": "adm"
+    }
+]

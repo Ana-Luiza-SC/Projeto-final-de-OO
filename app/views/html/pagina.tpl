@@ -55,11 +55,11 @@
         }
 
         .navbar a:hover {
-            background-color: #4a235a; /* Cor do botão ao passar o mouse */
+            background-color: #4a235a; 
         }
 
         .content {
-            padding-top: 60px; /* Para evitar que o conteúdo fique sob a navbar */
+            padding-top: 60px; 
             text-align: center;
         }
 
@@ -71,6 +71,29 @@
             font-size: 18px;
             color: #666;
         }
+
+        .button-center {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Estiliza o botão */
+        .button-center button {
+            padding: 10px 20px;
+            background-color: #6c3483;
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            font-family: 'Roboto', sans-serif; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background-color 0.3s; 
+        }
+
+        .button-center button:hover {
+            background-color: #4a235a;
+        }
+
         
 </style>
     </style>
@@ -96,9 +119,10 @@
             <p>Password: {{current_user.age}}</p>
             <p>Password: {{current_user.email}}</p>
             <p>idade: {{current_user.age}}</p>
-            <form class="logout-button" action="/logout" method="post">
+            <form class="button-center" action="/logout" method="post">
                 <button type="submit">Sair</button>
             </form>
+
         % else:
             <h2>Houve um erro no login ou você não está autenticado.</h2>
             <a href="/portal">Faça seu login</a>

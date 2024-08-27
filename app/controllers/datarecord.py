@@ -24,15 +24,15 @@ class DataRecord:
             # Se o arquivo não for encontrado, cria uma conta Guest padrão
             self.__user_accounts.append(UserAccount('Guest', '010101', '101010'))
 
-    def book(self,username,password,name,age,email):
+    def book(self,username,password,name,age,email,type):
         # Cria uma nova conta de usuário e a adiciona à lista, importante pro trabalho
-        new_user= UserAccount(username,password,name,age,email)
+        new_user= UserAccount(username,password,name,age,email,type)
         self.__user_accounts.append(new_user)
         # Escreve a lista atualizada de usuários de volta no arquivo JSON
         with open("app/controllers/db/user_accounts.json", "w") as arquivo_json:
             user_data = [vars(user_account) for user_account in \
             self.__user_accounts]
-            json.dump(user_data, arquivo_json)
+            json.dump(user_data, arquivo_json, indent=4)
 
     def getCurrentUser(self, session_id):
         # Retorna o usuário associado ao session_id, se existir
@@ -70,15 +70,27 @@ class Post:
     def __init__(self):
         # Lista para armazenar os posts
         self.posts_Blog = []
+        self.get_posts()
 
-    def criar_post(self, autor, titulo, conteudo, data, curtidas=0):
-        # Cria um novo post e adiciona à lista
-        new_post = post(autor, titulo, conteudo, data, curtidas)
-        self.posts_Blog.append(new_post)
-        # Escreve a lista atualizada de posts de volta pro arquivo json
+    def criar_post(self, autor, titulo, conteudo, data):
+        posts_existentes = self.get_posts()
+        new_post = post(autor, titulo, conteudo, data)
+        
+        # Adiciona o novo post à lista existente de posts
+        posts_existentes.append(vars(new_post))  # Converte o post para um dicionário
+        
+        # Escreve a lista atualizada de posts de volta para o arquivo JSON
         with open("app/controllers/db/posts-blog.json", "w") as arquivo_json:
-            post_data = [vars(post) for post in self.posts_Blog]
-            json.dump(post_data, arquivo_json)
+            json.dump(posts_existentes, arquivo_json, indent=4)
+            
+            
+    def read(self):
+        try:
+            with open("app/controllers/db/posts-blog.json", "r",encoding='utf-8') as arquivo_json:
+                post_data = json.load(arquivo_json)
+                self.posts_Blog = [Post(**data) for data in post_data]
+        except FileNotFoundError:
+            self.posts_Blog = []
 
     def get_posts(self):
         """Lê os posts do arquivo JSON e retorna uma lista de dicionários."""
