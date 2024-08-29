@@ -1,4 +1,4 @@
-from bottle import template,request
+from bottle import template, request, redirect
 from app.controllers.datarecord import DataRecord, Post 
 
 class Application():
@@ -111,9 +111,51 @@ class Application():
     
     def action_post(self,autor, titulo, conteudo, data):
         self.__posts.criar_post(autor, titulo, conteudo, data)
-    
+
     def administrador(self):
-        return template('app/views/html/administrador')
+        # Verifica se o usuário logado é administrador
+        session_id = self.get_session_id()
+        current_user = self.__model.getCurrentUser(session_id)
+
+        if current_user and current_user.type == "adm":
+            users = self.__model.get_all_users()
+            return template('app/views/html/administrador', users=users)
+        else:
+            return "Acesso negado. Somente administradores podem acessar esta página."
+
+    def add_user(self, username, password, name, age, email, type):
+        # Verifica se o usuário logado é administrador
+        session_id = self.get_session_id()
+        current_user = self.__model.getCurrentUser(session_id)
+
+        if current_user and current_user.type == "admin":
+            self.__model.book(username, password, name, age, email, type)
+            return redirect('/adm')
+        else:
+            return "Acesso negado. Somente administradores podem adicionar usuários."
+
+    def edit_user(self, username, new_data):
+        # Verifica se o usuário logado é administrador
+        session_id = self.get_session_id()
+        current_user = self.__model.getCurrentUser(session_id)
+
+        if current_user and current_user.type == "admin":
+            self.__model.update_user(username, new_data)
+            return redirect('/adm')
+        else:
+            return "Acesso negado. Somente administradores podem editar usuários."
+
+    def delete_user(self, username):
+        # Verifica se o usuário logado é administrador
+        session_id = self.get_session_id()
+        current_user = self.__model.getCurrentUser(session_id)
+
+        if current_user and current_user.type == "admin":
+            self.__model.delete_user(username)
+            return redirect('/adm')
+        else:
+            return "Acesso negado. Somente administradores podem excluir usuários."
+
         
 
     

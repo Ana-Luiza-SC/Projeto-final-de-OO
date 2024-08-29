@@ -64,7 +64,34 @@ class DataRecord:
         # Remove o usuário autenticado com base no session_id
         if session_id in self.__authenticated_users:
             del self.__authenticated_users[session_id]  # Remove o usuário logado
+            
+    def get_all_users(self):
+        # Retorna uma lista de todos os usuários
+        return self.__user_accounts
 
+    def update_user(self, username, new_data):
+        # Atualiza os dados de um usuário existente
+        for user in self.__user_accounts:
+            if user.username == username:
+                user.password = new_data.get('password', user.password)
+                user.name = new_data.get('name', user.name)
+                user.age = new_data.get('age', user.age)
+                user.email = new_data.get('email', user.email)
+                user.type = new_data.get('type', user.type)
+                break
+        self.save_users()
+
+    def delete_user(self, username):
+        # Remove um usuário da lista
+        self.__user_accounts = [user for user in self.__user_accounts if user.username != username]
+        self.save_users()
+
+    def save_users(self):
+        # Salva os usuários de volta no arquivo JSON
+        with open("app/controllers/db/user_accounts.json", "w") as arquivo_json:
+            user_data = [vars(user_account) for user_account in self.__user_accounts]
+            json.dump(user_data, arquivo_json, indent=4)
+    
 class Post:
     def __init__(self):
         # Lista para armazenar os posts

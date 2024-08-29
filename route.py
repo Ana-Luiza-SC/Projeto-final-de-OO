@@ -99,10 +99,35 @@ def action_novo_post():
     ctl.action_post(autor, titulo, conteudo, data)
     return redirect('/blog')
 
-@app.route('/administrador', method=['GET', 'POST'])
-def action_adm():
-    users = data['users']  
-    return template('users_list', users=users)
+@app.route('/admin', method=['GET', 'POST'])
+def administrador():
+    return ctl.render('admin')
+
+@app.route('/add_user', method='POST')
+def add_user():
+    username = request.forms.get('username')
+    password = request.forms.get('password')
+    name = request.forms.get('name')
+    age = request.forms.get('age')
+    email = request.forms.get('email')
+    user_type = request.forms.get('type')
+    return ctl.add_user(username, password, name, age, email, user_type)
+
+@app.route('/edit_user/<username>', method='POST')
+def edit_user(username):
+    new_data = {
+        'password': request.forms.get('password'),
+        'name': request.forms.get('name'),
+        'age': request.forms.get('age'),
+        'email': request.forms.get('email'),
+        'type': request.forms.get('type')
+    }
+    return ctl.edit_user(username, new_data)
+
+@app.route('/delete_user/<username>', method='POST')
+def delete_user(username):
+    return ctl.delete_user(username)
+
 
 
 if __name__ == '__main__':
