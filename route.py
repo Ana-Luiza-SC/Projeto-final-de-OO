@@ -12,13 +12,13 @@ ctl = Application()
 #-----------------------------------------------------------------------------
 # Rotas:
 
-@app.route('/static/<filepath:path>')
-def serve_static(filepath):
-    return static_file(filepath, root='./app/static')
+# @app.route('/static/<filepath:path>')
+# def serve_static(filepath):
+#     return static_file(filepath, root='./app/static')
 
-@app.route('/helper')
-def helper():
-    return ctl.render('helper')
+# @app.route('/helper')
+# def helper():
+#     return ctl.render('helper')
 
 @app.route('/pagina', methods=['GET'])
 @app.route('/pagina/<username>', methods=['GET'])
@@ -99,11 +99,10 @@ def action_novo_post():
     ctl.action_post(autor, titulo, conteudo, data)
     return redirect('/blog')
 
-@app.route('/adm', method=['GET', 'POST'])
-def adm():
-    return ctl.render('adm')
-    
-    
+@app.route('/administrador', method=['GET', 'POST'])
+def action_adm():
+    users = data['users']  
+    return template('users_list', users=users)
 
 
 if __name__ == '__main__':

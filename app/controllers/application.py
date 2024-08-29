@@ -11,7 +11,8 @@ class Application():
     'inicio': self.inicio,
     'blog':self.blog,
     'cadastro': self.cadastro,
-    'novo_post':self.novo_post
+    'novo_post':self.novo_post,
+    'administrador':self.administrador
 }
          # Instancia o modelo DataRecord, que gerencia usuários e sessões
         self.__model = DataRecord()
@@ -110,6 +111,9 @@ class Application():
     
     def action_post(self,autor, titulo, conteudo, data):
         self.__posts.criar_post(autor, titulo, conteudo, data)
+    
+    def administrador(self):
+        return template('app/views/html/administrador')
         
 
     

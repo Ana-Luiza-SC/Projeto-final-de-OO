@@ -1,5 +1,4 @@
-{
-    "users": [
+[
         {
             "username": "Henrique",
             "password": "123456",
@@ -15,14 +14,13 @@
             "age": "123",
             "email": "naosei@hahaha.br",
             "type": "user"
-        }
-    ],
-    "admin": {
-        "username": "Ana",
-        "password": "1",
-        "name": "0",
-        "age": "5",
-        "email": "naosei@hahaha.br",
-        "type": "adm"
+        },
+        {
+            "username": "Ana",
+            "password": "1",
+            "name": "0",
+            "age": "5",
+            "email": "naosei@hahaha.br",
+            "type": "adm"
     }
-}
+]
