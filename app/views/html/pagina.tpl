@@ -96,7 +96,6 @@
 
         
 </style>
-    </style>
 </head>
 <body>
     <div class="navbar">
@@ -104,11 +103,13 @@
             <tr>
                 <td class="left"><h1>Área do Usuário</h1></td>
                 <td class="right" align="right">
+                    <a href="/novo_post">Criar Post</a>
                     <a href="/blog">Blog</a>
                 </td>
             </tr>
         </table>
     </div>
+</body>
 
     <div class="content">
         % if transfered:

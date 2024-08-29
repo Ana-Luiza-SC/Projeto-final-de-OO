@@ -99,6 +99,10 @@ def action_novo_post():
     ctl.action_post(autor, titulo, conteudo, data)
     return redirect('/blog')
 
+@app.route('/adm', method=['GET', 'POST'])
+def adm():
+    return ctl.render('adm')
+    
     
 
 

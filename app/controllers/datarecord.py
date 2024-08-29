@@ -65,7 +65,6 @@ class DataRecord:
         if session_id in self.__authenticated_users:
             del self.__authenticated_users[session_id]  # Remove o usuário logado
 
-
 class Post:
     def __init__(self):
         # Lista para armazenar os posts

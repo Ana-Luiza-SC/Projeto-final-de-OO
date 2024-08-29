@@ -131,7 +131,7 @@
 
     <div class="content">
         <div class="form-container">
-            <h2>Crie uma nova conta</h2>
+            <h2>Crie um novo post</h2>
             <form action="/novo_post" method="POST">
                 <label for="autor">Autor:</label>
                 <input type="text" id="autor" name="Autor">
