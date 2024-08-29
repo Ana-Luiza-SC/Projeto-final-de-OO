@@ -109,13 +109,45 @@
         }
     </style>
 </head>
-<body>
-    <h1>Usuários Cadastrados</h1>
-    <ul>
+<h1>Painel de Administração</h1>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Email</th>
+        <th>Tipo</th>
+        <th>Ações</th>
+    </tr>
     % for user in users:
-        <li>Username: {{user['username']}} | Senha: {{user['password']}} | Nome: {{user['name']}} | Idade: {{user['age']}} | Email: {{user['email']}}</li>
+    <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.age }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.type }}</td>
+        <td>
+            <form action="/edit_user/{{ user.username }}" method="POST">
+                <button type="submit">Editar</button>
+            </form>
+            <form action="/delete_user/{{ user.username }}" method="POST">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+    </tr>
     % end
-    </ul>
-    <a href="/add">Adicionar Usuário</a> | <a href="/remove">Remover usuario</a>
-</body>
-</html>
+</table>
+
+<h2>Adicionar Novo Usuário</h2>
+<form action="/add_user" method="POST">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Senha" required>
+    <input type="text" name="name" placeholder="Nome">
+    <input type="number" name="age" placeholder="Idade">
+    <input type="email" name="email" placeholder="Email">
+    <select name="type">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+    </select>
+    <button type="submit">Adicionar</button>
+</form>
