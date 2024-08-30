@@ -119,7 +119,7 @@ class Application():
 
         if current_user and current_user.type == "adm":
             users = self.__model.get_all_users()
-            return template('app/views/html/administrador', users=users)
+            return template('app/views/html/adm', users=users)
         else:
             return "Acesso negado. Somente administradores podem acessar esta página."
 
@@ -128,7 +128,7 @@ class Application():
         session_id = self.get_session_id()
         current_user = self.__model.getCurrentUser(session_id)
 
-        if current_user and current_user.type == "admin":
+        if current_user and current_user.type == "adm":
             self.__model.book(username, password, name, age, email, type)
             return redirect('/adm')
         else:
@@ -139,7 +139,7 @@ class Application():
         session_id = self.get_session_id()
         current_user = self.__model.getCurrentUser(session_id)
 
-        if current_user and current_user.type == "admin":
+        if current_user and current_user.type == "adm":
             self.__model.update_user(username, new_data)
             return redirect('/adm')
         else:
@@ -150,7 +150,7 @@ class Application():
         session_id = self.get_session_id()
         current_user = self.__model.getCurrentUser(session_id)
 
-        if current_user and current_user.type == "admin":
+        if current_user and current_user.type == "adm":
             self.__model.delete_user(username)
             return redirect('/adm')
         else:

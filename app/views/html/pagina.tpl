@@ -105,6 +105,7 @@
                 <td class="right" align="right">
                     <a href="/novo_post">Criar Post</a>
                     <a href="/blog">Blog</a>
+                    <a href="/adm">Area do administrador</a>
                 </td>
             </tr>
         </table>

@@ -99,9 +99,9 @@ def action_novo_post():
     ctl.action_post(autor, titulo, conteudo, data)
     return redirect('/blog')
 
-@app.route('/admin', method=['GET', 'POST'])
+@app.route('/area', method=['GET', 'POST'])
 def administrador():
-    return ctl.render('admin')
+    return ctl.render('adm')
 
 @app.route('/add_user', method='POST')
 def add_user():
