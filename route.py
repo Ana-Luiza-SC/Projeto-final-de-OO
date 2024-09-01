@@ -19,9 +19,8 @@ def helper():
 # ---------- User Pages --------------------------------------------------------
 
 @app.route('/pagina', methods=['GET'])
-@app.route('/pagina/<username>', methods=['GET'])
 def action_pagina(username=None):
-    return ctl.render('pagina', username=username)
+    return ctl.render('pagina')
 
 @app.route('/portal', method='GET')
 def login():

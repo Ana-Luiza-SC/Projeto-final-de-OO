@@ -22,37 +22,5 @@
         "age": "5",
         "email": "sim@sem.com",
         "type": "adm"
-    },
-    {
-        "username": "Vi",
-        "password": null,
-        "name": "Valdemir",
-        "age": "8",
-        "email": "com@email.com",
-        "type": "user"
-    },
-    {
-        "username": "tia",
-        "password": "6",
-        "name": "ti\u00c3\u00a3o",
-        "age": "60",
-        "email": "f@b.com",
-        "type": "user"
-    },
-    {
-        "username": "Flores",
-        "password": "3",
-        "name": "Fl\u00c3\u00b5\u00c3\u00a9s",
-        "age": "3",
-        "email": "r@g.com",
-        "type": "user"
-    },
-    {
-        "username": "xi",
-        "password": "45",
-        "name": "s",
-        "age": "6",
-        "email": "4@c.com",
-        "type": "user"
     }
 ]
