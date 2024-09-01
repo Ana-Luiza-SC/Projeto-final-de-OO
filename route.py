@@ -1,62 +1,52 @@
+from bottle import Bottle, request, redirect, response, template, static_file
 from app.controllers.application import Application
-from app.controllers.datarecord import DataRecord, Post 
-from bottle import Bottle, route, run, request, static_file
-from bottle import redirect, template, response
 from datetime import date
-
 
 app = Bottle()
 ctl = Application()
 
+# Serve static files from the 'app/static' directory
+@app.route('/static/<filepath:path>')
+def serve_static(filepath):
+    return static_file(filepath, root='./app/static')
 
-#-----------------------------------------------------------------------------
-# Rotas:
+# ---------- Helper Pages ------------------------------------------------------
 
-# @app.route('/static/<filepath:path>')
-# def serve_static(filepath):
-#     return static_file(filepath, root='./app/static')
+@app.route('/helper')
+def helper():
+    return ctl.render('helper')
 
-# @app.route('/helper')
-# def helper():
-#     return ctl.render('helper')
+# ---------- User Pages --------------------------------------------------------
 
 @app.route('/pagina', methods=['GET'])
 @app.route('/pagina/<username>', methods=['GET'])
 def action_pagina(username=None):
-    if not username:
-        return ctl.render('pagina')
-    else:
-        return ctl.render('pagina', username)
+    return ctl.render('pagina', username=username)
 
 @app.route('/portal', method='GET')
 def login():
     return ctl.render('portal')
 
 @app.route('/portal', method='POST')
-def action_portal(): 
-    username = request.forms.get('username') 
-    password = request.forms.get('password') 
-    auth_result = ctl.authenticate_user(username, password) 
+def action_portal():
+    username = request.forms.get('username')
+    password = request.forms.get('password')
+    auth_result = ctl.authenticate_user(username, password)
     
-    if auth_result is not None: 
+    if auth_result is not None:
         session_id, username = auth_result
         response.set_cookie('session_id', session_id, httponly=True, secure=True, max_age=3600)
-        redirect(f'/blog')
-    else: 
+        redirect('/blog')
+    else:
         return redirect('/portal')
 
 @app.route('/logout', method='POST')
 def logout():
-    session_id = request.get_cookie("session_id")  # Obtém o ID da sessão atual
+    session_id = request.get_cookie("session_id")
     if session_id:
-        ctl.logout_user()  # Chama o método de logout para remover a sessão
-        response.delete_cookie("session_id")  # Remove o cookie de sessão do cliente
-    return redirect('/')  # Redireciona para a página inicial
-
-    
-
-#-----------------------------------------------------------------------------
-# Suas rotas aqui:
+        ctl.logout_user()
+        response.delete_cookie("session_id")
+    return redirect('/')
 
 @app.route('/', method=['GET', 'POST'])
 def inicio():
@@ -66,6 +56,7 @@ def inicio():
 def blog():
     return ctl.render('blog')
 
+# ---------- User Registration --------------------------------------------------
 
 @app.route('/cadastro', method='GET')
 def cadastro():
@@ -80,11 +71,13 @@ def action_cadastro():
     email = request.forms.get('email')
     
     ctl.action_book(username, password, name, age, email)
-    redirect(f'/portal')
+    return redirect('/portal')
 
-@app.route('/novo_post', method='GET')
-def novo_post():
-    return ctl.render('novo_post')
+# ---------- Post Management ---------------------------------------------------
+
+@app.route('/post', method='GET')
+def area_post():
+    return ctl.render('post')
 
 @app.route('/novo_post', method='POST')
 def action_novo_post():
@@ -92,16 +85,33 @@ def action_novo_post():
     titulo = request.forms.get('Titulo')
     conteudo = request.forms.get('Conteudo')
     data = date.today().strftime('%Y-%m-%d')
-    
-    if not autor or not titulo or not conteudo:
-        return "Todos os campos são obrigatórios."
 
     ctl.action_post(autor, titulo, conteudo, data)
     return redirect('/blog')
 
-@app.route('/area', method=['GET', 'POST'])
+@app.route('/post_adm', method='GET')
+def post_control():
+    return ctl.post_control()  # Chama o método correto para exibir a página de controle dos posts
+
+@app.route('/delete_post/<post_title>', method='POST')
+def delete_post(post_title):
+    ctl.delete_post(post_title)
+    return redirect('/post_adm')
+
+@app.route('/edit_post/<post_title>', method='POST')
+def edit_post(post_title):
+    new_data = {
+        'title': request.forms.get('title'),
+        'content': request.forms.get('content')
+    }
+    ctl.edit_post(post_title, new_data)  # Passa o título e new_data como argumento
+    return redirect('/post_adm')
+
+# ---------- Admin Pages --------------------------------------------------------
+
+@app.route('/area_adm', method=['GET', 'POST'])
 def administrador():
-    return ctl.render('adm')
+    return ctl.administrador()
 
 @app.route('/add_user', method='POST')
 def add_user():
@@ -128,7 +138,5 @@ def edit_user(username):
 def delete_user(username):
     return ctl.delete_user(username)
 
-
-
 if __name__ == '__main__':
-    run(app, host='localhost', port=8080, debug=True)
+    app.run(host='localhost', port=8080, debug=True)

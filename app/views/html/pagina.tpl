@@ -98,18 +98,23 @@
 </style>
 </head>
 <body>
+
     <div class="navbar">
         <table>
             <tr>
                 <td class="left"><h1>Área do Usuário</h1></td>
                 <td class="right" align="right">
-                    <a href="/novo_post">Criar Post</a>
                     <a href="/blog">Blog</a>
-                    <a href="/adm">Area do administrador</a>
+                    % if current_user is not None and current_user.type == "adm":
+                        <a href="/area_adm">Área do administrador</a>
+                        <a href="/post">Criar Post</a>
+                        <a href="/post_adm">Controle dos Posts</a>
+                    %end
                 </td>
             </tr>
         </table>
     </div>
+
 </body>
 
     <div class="content">

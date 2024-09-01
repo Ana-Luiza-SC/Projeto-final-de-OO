@@ -106,8 +106,8 @@ class Post:
         posts_existentes.append(vars(new_post))  # Converte o post para um dicionário
         
         # Escreve a lista atualizada de posts de volta para o arquivo JSON
-        with open("app/controllers/db/posts-blog.json", "w") as arquivo_json:
-            json.dump(posts_existentes, arquivo_json, indent=4)
+        with open("app/controllers/db/posts-blog.json", "w",encoding="utf-8") as arquivo_json:
+            json.dump(posts_existentes, arquivo_json, indent=4, ensure_ascii=False)
             
             
     def read(self):
@@ -130,3 +130,30 @@ class Post:
         except json.JSONDecodeError:
             print("Erro: O arquivo JSON está mal formatado.")
             return []
+        
+    def edit_post(self, titulo, novos_dados):
+        """Edita um post existente com base no título."""
+        posts_existentes = self.get_posts()
+        
+        for post_data in posts_existentes:
+            if post_data['titulo'] == titulo:
+                post_data.update(novos_dados)  # Atualiza os dados do post
+                
+                # Escreve a lista atualizada de posts de volta para o arquivo JSON
+                with open("app/controllers/db/posts-blog.json", "w", encoding="utf-8") as arquivo_json:
+                    json.dump(posts_existentes, arquivo_json, indent=4, ensure_ascii=False)
+                return True
+        
+        return False  # Retorna False se o post com o título especificado não for encontrado
+
+    def delete_post(self, titulo):
+        """Remove um post existente com base no título."""
+        posts_existentes = self.get_posts()
+        
+        # Filtra os posts, mantendo apenas aqueles que não correspondem ao título especificado
+        posts_restantes = [post_data for post_data in posts_existentes if post_data['titulo'] != titulo]
+
+        # Escreve a lista atualizada de posts de volta para o arquivo JSON
+        with open("app/controllers/db/posts-blog.json", "w", encoding="utf-8") as arquivo_json:
+            json.dump(posts_restantes, arquivo_json, indent=4, ensure_ascii=False)
+

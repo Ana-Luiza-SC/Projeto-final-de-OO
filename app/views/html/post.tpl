@@ -120,32 +120,50 @@
     <div class="navbar">
         <table>
             <tr>
-                <td><h2>criação de novos posts</h2></td>
+                <td><h2>Criação de Novos Posts</h2></td>
                 <td style="text-align: right;">
                     <a href="/blog">Blog</a>
                     <a href="/pagina">Página de Usuário</a>
+                    % if current_user is not None and current_user.type == "adm":
+                        <a href="/area_adm">Área do administrador</a>
+                        <a href="/post">Criar Post</a>
+                        <a href="/post_adm">Controle dos Posts</a>
+                    %end
                 </td>
             </tr>
         </table>
     </div>
 
     <div class="content">
-        <div class="form-container">
-            <h2>Crie um novo post</h2>
-            <form action="/novo_post" method="POST">
-                <label for="autor">Autor:</label>
-                <input type="text" id="autor" name="Autor">
-                
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="Titulo">
-                
-                <label for="conteudo">Conteúdo:</label>
-                <textarea id="conteudo" name="Conteudo"></textarea>
-                
-                <input type="submit" value="Publicar">
-            </form>
-
-        </div>
+        %if not transfered:
+            <h2>Houve erro no login do usuário</h2>
+            <a href="/portal">Faça seu login</a>
+        
+        %elif current_user.type != "adm":
+            <h2>Você não tem permissão para criar posts. Volte para a <a href="/pagina">Página de Usuário</a></h2>
+        
+        %else:
+            <div class="form-container">
+                <h2>Crie um Novo Post</h2>
+                <form action="/novo_post" method="POST">
+                    <div class="form-group">
+                        <label for="autor">Autor:</label>
+                        <input type="text" id="autor" name="Autor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="titulo">Título:</label>
+                        <input type="text" id="titulo" name="Titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="conteudo">Conteúdo:</label>
+                        <textarea id="conteudo" name="Conteudo" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Publicar">
+                    </div>
+                </form>
+            </div>
+        %end
     </div>
 </body>
 </html>

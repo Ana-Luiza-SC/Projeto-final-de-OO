@@ -113,9 +113,14 @@
     <div class="navbar">
         <table>
             <tr>
-                <td class="left"><h1>Área do Blog</h1></td>
+                <td class="left"><h1>Área do Usuário</h1></td>
                 <td class="right" align="right">
-                    <a href="/pagina">Área de usuário</a>
+                    <a href="/pagina">Área do usuário</a>
+                    % if current_user is not None and current_user.type == "adm":
+                        <a href="/area_adm">Área do administrador</a>
+                        <a href="/post">Criar Post</a>
+                        <a href="/post_adm">Controle dos Posts</a>
+                    %end
                 </td>
             </tr>
         </table>
@@ -124,11 +129,7 @@
     <div class="content">
         % if transfered == True: 
             % if current_user.type == "adm":
-                <h2>Você é um adm</h2>  <!-- O adm tem direito a fazer novos posts -->
-                <p>Se você quiser criar novo post acesse o seguinte link:</p>
-                <div class="button-center">
-                    <a href="/novo_post">Novos posts</a>
-                </div>
+                <h2>Você é um adm</h2> 
 
             % end
             <h2>Área do blog</h2>
@@ -140,9 +141,6 @@
                         <p>Data: {{ post['data'] }}</p>
                     % end
             </article>
-            % if current_user.type == "adm":
-                <h2>Você é um adm</h2>
-            % end
         % else: 
             <h2>Houve erro no login do usuário</h2>
             <a href="/portal">Faça seu login</a>

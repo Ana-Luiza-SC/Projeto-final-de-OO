@@ -11,53 +11,33 @@ class Application():
     'inicio': self.inicio,
     'blog':self.blog,
     'cadastro': self.cadastro,
-    'novo_post':self.novo_post,
-    'administrador':self.administrador
+    'post':self.post,
+    'area_adm':self.administrador,
+    'post_control': self.post_control
 }
          # Instancia o modelo DataRecord, que gerencia usuários e sessões
         self.__model = DataRecord()
         self.__posts = Post()
 
+#---------------paginas iniciais e controles-----------------------------------------------
 
     def render(self,page,parameter = None):
-         # Obtém o método de renderização da página baseado no nome fornecido
         content = self.pages.get(page, self.helper)
-        # Renderiza a página com ou sem parâmetros
         if not parameter:
             return content()
         else:
             return content(parameter)
         
-
     def get_session_id(self):
-        # Obtém o cookie de sessão armazenado no navegador do usuário
         return request.get_cookie('session_id')
-
 
     def helper(self):
         return template('app/views/html/helper')
 
-
     def portal(self):
         return template('app/views/html/portal')
     
-    def pagina(self,username=None):
-            session_id = self.get_session_id()
-            username = self.__model.getUserName(session_id)
-            if username is None:
-                return template('app/views/html/pagina', \
-                transfered=False)
-            elif self.is_authenticated(username):
-                session_id= self.get_session_id()
-                # Obtém o usuário atual a partir do session_id
-                user = self.__model.getCurrentUser(session_id)
-                return template('app/views/html/pagina', \
-                transfered=True, current_user=user)
-            else:
-                return template('app/views/html/pagina', \
-                transfered=False)
         
-    
     def is_authenticated(self,username):
          # Verifica se o username corresponde ao username associado ao session_id
         session_id = self.get_session_id()
@@ -68,7 +48,6 @@ class Application():
          # Autentica o usuário verificando username e password e retornando o session_id se for válido
         session_id = self.__model.checkUser(username,password)
         if session_id:
-            # Se o usuário já estiver logado, efetua logout antes de continuar
             self.logout_user()
             self.current_username = self.__model.getUserName(session_id)
             return session_id,username
@@ -84,44 +63,116 @@ class Application():
     def inicio(self):
         return template('app/views/html/inicio')
     
-    def blog(self,username=None):
-            session_id = self.get_session_id()
-            username = self.__model.getUserName(session_id)
-            if username is None:
-                return template('app/views/html/blog', \
-                transfered=False)
-            elif self.is_authenticated(username):
-                post = self.__posts.get_posts() #manda os post disponíveis
-                session_id= self.get_session_id() #manda o usuário disponível
-                user = self.__model.getCurrentUser(session_id)
-                return template('app/views/html/blog', \
-                transfered=True, current_post = post, current_user = user)
-            else:
-                return template('app/views/html/blog', \
-                transfered=False)
-    
     def cadastro(self):
         return template('app/views/html/cadastro')
 
     def action_book(self, username, password, name, age, email):
         self.__model.book(username, password, name, age, email, type = "user")
         
-    def novo_post(self):
-        return template('app/views/html/novo_post')
+        
+# ------------------------------- páginas dos usuários ------------------------------------------
     
-    def action_post(self,autor, titulo, conteudo, data):
+    def blog(self,username=None):
+            session_id = self.get_session_id()
+            username = self.__model.getUserName(session_id)
+            if username is None:
+                return template('app/views/html/blog', \
+                transfered=False, current_user = None)
+            elif self.is_authenticated(username):
+                post = self.__posts.get_posts() #manda os post disponíveis
+                session_id= self.get_session_id() #manda o usuário atual
+                user = self.__model.getCurrentUser(session_id)
+                return template('app/views/html/blog', \
+                transfered=True, current_post = post, current_user = user)
+            else:
+                return template('app/views/html/blog', \
+                transfered=False, current_user = None)
+                
+    def pagina(self,username=None):
+            session_id = self.get_session_id()
+            username = self.__model.getUserName(session_id)
+            if username is None:
+                return template('app/views/html/pagina', \
+                transfered=False, current_user = None)
+            elif self.is_authenticated(username):
+                session_id= self.get_session_id()
+                # Obtém o usuário atual a partir do session_id
+                user = self.__model.getCurrentUser(session_id)
+                return template('app/views/html/pagina', \
+                transfered=True, current_user=user)
+            else:
+                return template('app/views/html/pagina', \
+                transfered=False,current_user = None)
+    
+    
+    
+#------------------------página de controle dos post --------------------------------------------------
+
+
+    def post(self): #páginas de novos posts
+        session_id = self.get_session_id()
+        username = self.__model.getUserName(session_id) #verificar se está logado
+        if username is None:
+            return template('app/views/html/post', \
+            transfered=False, current_user = None)
+        elif self.is_authenticated(username):
+            session_id= self.get_session_id() #manda o usuário atual
+            user = self.__model.getCurrentUser(session_id)
+            return template('app/views/html/post', \
+            transfered=True, current_user = user)
+        else:
+            return template('app/views/html/post', \
+                transfered=False, current_user = None)
+    
+    def action_post(self,autor, titulo, conteudo, data): # guarda o novo post
         self.__posts.criar_post(autor, titulo, conteudo, data)
+        
+    def post_control(self): #página responsável para a remoção e edição dos post
+        session_id = self.get_session_id()
+        username = self.__model.getUserName(session_id)
+        
+        if username is None:
+            return template('app/views/html/post_control', transfered=False, current_user=None)
+        
+        elif self.is_authenticated(username):
+            user = self.__model.getCurrentUser(session_id)
+            post = self.__posts.get_posts()
+            return template('app/views/html/post_control', transfered=True, current_user=user, current_post=post)
+        
+        else:
+            return template('app/views/html/post_control', transfered=False, current_user=None)
+
+    def edit_post(self, title, new_data):  # Atualiza o post pelo título
+        posts = self.__posts.get_posts()
+        for post in posts:
+            if post['title'] == title:
+                post.update(new_data)
+                break
+        self.__posts.save_posts(posts)
+
+
+    def delete_post(self, title):  # Remove o post
+        self.__posts.delete_post(title)
+
+        
+#---------------------- página de controle de usuários ----------------------------------------------
 
     def administrador(self):
-        # Verifica se o usuário logado é administrador
         session_id = self.get_session_id()
-        current_user = self.__model.getCurrentUser(session_id)
-
-        if current_user and current_user.type == "adm":
+        username = self.__model.getUserName(session_id)  # verificar se está logado
+        if username is None:
+            return template('app/views/html/area_adm', \
+            transfered=False, current_user=None)
+        elif self.is_authenticated(username):
+            session_id = self.get_session_id()
+            current_user = self.__model.getCurrentUser(session_id)
             users = self.__model.get_all_users()
-            return template('app/views/html/adm', users=users)
+            return template('app/views/html/area_adm', \
+            transfered=True, current_user=current_user, users=users)
         else:
-            return "Acesso negado. Somente administradores podem acessar esta página."
+            return template('app/views/html/area_adm', \
+                transfered=False, current_user=None)
+
 
     def add_user(self, username, password, name, age, email, type):
         # Verifica se o usuário logado é administrador
@@ -130,7 +181,7 @@ class Application():
 
         if current_user and current_user.type == "adm":
             self.__model.book(username, password, name, age, email, type)
-            return redirect('/adm')
+            return redirect('/area_adm')
         else:
             return "Acesso negado. Somente administradores podem adicionar usuários."
 
@@ -141,7 +192,7 @@ class Application():
 
         if current_user and current_user.type == "adm":
             self.__model.update_user(username, new_data)
-            return redirect('/adm')
+            return redirect('/area_adm')
         else:
             return "Acesso negado. Somente administradores podem editar usuários."
 
@@ -152,23 +203,6 @@ class Application():
 
         if current_user and current_user.type == "adm":
             self.__model.delete_user(username)
-            return redirect('/adm')
+            return redirect('/area_adm')
         else:
             return "Acesso negado. Somente administradores podem excluir usuários."
-
-        
-
-    
-    
-
-"""
-O sistema de login do seu projeto funciona utilizando sessões baseadas em cookies. Quando um usuário faz login, o sistema verifica as 
-credenciais (nome de usuário e senha) e, se forem válidas, gera um session_id único, que é armazenado como um cookie no navegador do usuário. 
-Esse session_id é usado para identificar o usuário em solicitações futuras e para mostrar informações personalizadas, como o nome de usuário 
-na página.
-
-Se as informações não aparecem em outro navegador, isso ocorre porque os cookies (incluindo o session_id) são específicos para cada navegador.
-Quando você abre um novo navegador, ele não possui o cookie com o session_id do usuário autenticado no primeiro navegador, então o sistema não 
-reconhece que esse usuário já está logado, e as informações personalizadas não são exibidas. Para acessar as informações em outro navegador, 
-o usuário precisaria fazer login novamente.
-"""
