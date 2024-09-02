@@ -97,6 +97,7 @@ class Post:
         # Lista para armazenar os posts
         self.posts_Blog = []
         self.get_posts()
+        #self.read()
 
     def criar_post(self, autor, titulo, conteudo, data):
         posts_existentes = self.get_posts()
@@ -106,8 +107,7 @@ class Post:
         posts_existentes.append(vars(new_post))  # Converte o post para um dicionário
         
         # Escreve a lista atualizada de posts de volta para o arquivo JSON
-        with open("app/controllers/db/posts-blog.json", "w", encoding="utf-8") as arquivo_json:
-            json.dump(posts_existentes, arquivo_json, indent=4, ensure_ascii=False)
+        self.save_posts()
             
             
     def read(self):

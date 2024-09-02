@@ -1,4 +1,4 @@
-from bottle import template, request, redirect
+from bottle import template, request, redirect, response
 from app.controllers.datarecord import DataRecord, Post 
 
 class Application():
@@ -32,9 +32,11 @@ class Application():
         return request.get_cookie('session_id')
 
     def helper(self):
+        response.content_type = 'text/html; charset=utf-8'
         return template('app/views/html/helper')
 
     def portal(self):
+        response.content_type = 'text/html; charset=utf-8'
         return template('app/views/html/portal')
     
         
@@ -61,9 +63,11 @@ class Application():
             self.__model.logout(session_id)
             
     def inicio(self):
+        response.content_type = 'text/html; charset=utf-8'
         return template('app/views/html/inicio')
     
     def cadastro(self):
+        response.content_type = 'text/html; charset=utf-8'
         return template('app/views/html/cadastro')
 
     def action_book(self, username, password, name, age, email):
@@ -73,36 +77,38 @@ class Application():
 # ------------------------------- páginas dos usuários ------------------------------------------
     
     def blog(self,username=None):
-            session_id = self.get_session_id()
-            username = self.__model.getUserName(session_id)
-            if username is None:
-                return template('app/views/html/blog', \
-                transfered=False, current_user = None)
-            elif self.is_authenticated(username):
-                post = self.__posts.get_posts() #manda os post disponíveis
-                session_id= self.get_session_id() #manda o usuário atual
-                user = self.__model.getCurrentUser(session_id)
-                return template('app/views/html/blog', \
-                transfered=True, current_post = post, current_user = user)
-            else:
-                return template('app/views/html/blog', \
-                transfered=False, current_user = None)
+        response.content_type = 'text/html; charset=utf-8'
+        session_id = self.get_session_id()
+        username = self.__model.getUserName(session_id)
+        if username is None:
+            return template('app/views/html/blog', \
+            transfered=False, current_user = None)
+        elif self.is_authenticated(username):
+            post = self.__posts.get_posts() #manda os post disponíveis
+            session_id= self.get_session_id() #manda o usuário atual
+            user = self.__model.getCurrentUser(session_id)
+            return template('app/views/html/blog', \
+            transfered=True, current_post = post, current_user = user)
+        else:
+            return template('app/views/html/blog', \
+            transfered=False, current_user = None)
                 
     def pagina(self,username=None):
-            session_id = self.get_session_id()
-            username = self.__model.getUserName(session_id)
-            if username is None:
-                return template('app/views/html/pagina', \
-                transfered=False, current_user = None)
-            elif self.is_authenticated(username):
-                session_id= self.get_session_id()
-                # Obtém o usuário atual a partir do session_id
-                user = self.__model.getCurrentUser(session_id)
-                return template('app/views/html/pagina', \
-                transfered=True, current_user=user)
-            else:
-                return template('app/views/html/pagina', \
-                transfered=False,current_user = None)
+        response.content_type = 'text/html; charset=utf-8'
+        session_id = self.get_session_id()
+        username = self.__model.getUserName(session_id)
+        if username is None:
+            return template('app/views/html/pagina', \
+            transfered=False, current_user = None)
+        elif self.is_authenticated(username):
+            session_id= self.get_session_id()
+            # Obtém o usuário atual a partir do session_id
+            user = self.__model.getCurrentUser(session_id)
+            return template('app/views/html/pagina', \
+            transfered=True, current_user=user)
+        else:
+            return template('app/views/html/pagina', \
+            transfered=False,current_user = None)
     
     
     
@@ -110,6 +116,7 @@ class Application():
 
 
     def post(self): #páginas de novos posts
+        response.content_type = 'text/html; charset=utf-8'
         session_id = self.get_session_id()
         username = self.__model.getUserName(session_id) #verificar se está logado
         if username is None:
@@ -128,22 +135,21 @@ class Application():
         self.__posts.criar_post(autor, titulo, conteudo, data)
         
     def post_control(self): #página responsável para a remoção e edição dos post
+        response.content_type = 'text/html; charset=utf-8'
         session_id = self.get_session_id()
         username = self.__model.getUserName(session_id)
-        
         if username is None:   
             return template('app/views/html/post_control', transfered=False, current_user=None)
-        
         elif self.is_authenticated(username):
             user = self.__model.getCurrentUser(session_id)
             post = self.__posts.get_posts()
             return template('app/views/html/post_control', transfered=True, current_user=user, current_post=post)
-        
         else:
             return template('app/views/html/post_control', transfered=False, current_user=None)
 
     def edit_post(self, title, new_data):  # Atualiza o post pelo título
         # Verifica se o usuário logado é administrador
+        response.content_type = 'text/html; charset=utf-8'
         session_id = self.get_session_id()
         current_user = self.__model.getCurrentUser(session_id)
         posts = self.__posts.get_posts()
@@ -162,6 +168,7 @@ class Application():
 #---------------------- página de controle de usuários ----------------------------------------------
 
     def administrador(self):
+        response.content_type = 'text/html; charset=utf-8'
         session_id = self.get_session_id()
         username = self.__model.getUserName(session_id)  # verificar se está logado
         if username is None:
@@ -180,6 +187,7 @@ class Application():
 
     def add_user(self, username, password, name, age, email, type):
         # Verifica se o usuário logado é administrador
+        response.content_type = 'text/html; charset=utf-8'
         session_id = self.get_session_id()
         current_user = self.__model.getCurrentUser(session_id)
 
@@ -191,6 +199,7 @@ class Application():
 
     def edit_user(self, username, new_data):
         # Verifica se o usuário logado é administrador
+        response.content_type = 'text/html; charset=utf-8'
         session_id = self.get_session_id()
         current_user = self.__model.getCurrentUser(session_id)
 
