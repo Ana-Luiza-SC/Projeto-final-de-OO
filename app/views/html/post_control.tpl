@@ -1,3 +1,4 @@
+% from route import sanitize_string
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -142,7 +143,18 @@
         .edit-form {
             display: none; /* Começa oculto */
         }
+        
     </style>
+    <script>
+        function toggleEditForm(title) {
+            const form = document.getElementById(`edit-form-${title}`);
+            if (form.style.display === "none" || form.style.display === "") {
+                form.style.display = "block"; // Exibe o formulário
+            } else {
+                form.style.display = "none"; // Oculta o formulário
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="navbar">
@@ -190,10 +202,18 @@
                         <td>{{ post['autor'] }}</td>
                         <td>{{ post['data'] }}</td>
                         <td>
-                            <form action="/edit_post/{{ post['titulo'] }}" method="POST" style="display:inline;">
-                                <button type="submit">Editar</button>
-                            </form>
-                            <form action="/delete_post/{{ post['titulo'] }}" method="POST" style="display:inline;">
+                            <!-- Botão para exibir o formulário de edição -->
+                            <button type="button" onclick="toggleEditForm('{{ sanitize_string(post['titulo']) }}')">Editar</button>
+                            <div id="edit-form-{{ sanitize_string(post['titulo']) }}" class="edit-form">
+                                <form action="/edit_post/{{ sanitize_string(post['titulo']) }}" method="POST">
+                                <input type="text" name="titulo" value="{{ post['titulo'] }}" placeholder="Titulo" required>
+                                    <input type="text" name="conteudo" value="{{ post['conteudo'] }}" placeholder="Conteudo" required>
+                                    <input type="text" name="autor" value="{{ post['autor'] }}" placeholder="Autor" required>
+                                    <input type="text" name="data" value="{{ post['data'] }}" placeholder="Data" required>
+                                    <button type="submit">Salvar</button>
+                                    </form>
+                            </div>
+                            <form action="/delete_post/{{ sanitize_string(post['titulo']) }}" method="POST" style="display:inline;">
                                 <button type="submit">Excluir</button>
                             </form>
                         </td>

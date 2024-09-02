@@ -1,6 +1,6 @@
 from app.models.user_account import UserAccount, text, post, comentario
 import json
-import uuid
+import uuid 
 
 class DataRecord:
     """Banco de dados JSON para o recurso Usuários"""
@@ -137,9 +137,9 @@ class Post:
         
         for post_data in self.posts_Blog:
             if post_data.titulo == titulo:
-                post_data.autor == novos_dados.get('autor', post_data.autor) # Atualiza os dados do post
-                post_data.conteudo == novos_dados.get('conteudo', post_data.conteudo)
-                post_data.data == novos_dados.get('data', post_data.data)
+                post_data.autor = novos_dados.get('autor', post_data.autor) # Atualiza os dados do post
+                post_data.conteudo = novos_dados.get('conteudo', post_data.conteudo)
+                post_data.data = novos_dados.get('data', post_data.data)
                 break
         self.save_posts()
                 

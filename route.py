@@ -1,10 +1,14 @@
 from bottle import Bottle, request, redirect, response, template, static_file
 from app.controllers.application import Application
 from datetime import date
+import re 
 
 app = Bottle()
 ctl = Application()
 
+def sanitize_string(s):
+    return re.sub(r'[^\w-]', '', s.replace(' ', '_'))
+    
 # Serve static files from the 'app/static' directory
 @app.route('/static/<filepath:path>')
 def serve_static(filepath):

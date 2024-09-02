@@ -131,7 +131,7 @@ class Application():
         session_id = self.get_session_id()
         username = self.__model.getUserName(session_id)
         
-        if username is None:
+        if username is None:   
             return template('app/views/html/post_control', transfered=False, current_user=None)
         
         elif self.is_authenticated(username):
