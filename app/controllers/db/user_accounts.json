@@ -22,13 +22,5 @@
         "age": "5",
         "email": "sim@sem.com",
         "type": "adm"
-    },
-    {
-        "username": "Vilbs",
-        "password": "1",
-        "name": "VIlmar",
-        "age": "13",
-        "email": "aaa@aa",
-        "type": "user"
     }
 ]

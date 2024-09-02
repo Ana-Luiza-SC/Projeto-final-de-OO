@@ -16,7 +16,7 @@ class DataRecord:
     def read(self):
         try:
             # Tenta abrir e ler o arquivo JSON que contém as contas de usuários
-            with open("app/controllers/db/user_accounts.json", "r") as arquivo_json:
+            with open("app/controllers/db/user_accounts.json", "r", encoding='utf-8') as arquivo_json:
                 user_data = json.load(arquivo_json)
                 # Converte os dados do JSON em objetos UserAccount
                 self.__user_accounts = [UserAccount(**data) for data in user_data]
@@ -29,7 +29,7 @@ class DataRecord:
         new_user= UserAccount(username,password,name,age,email,type)
         self.__user_accounts.append(new_user)
         # Escreve a lista atualizada de usuários de volta no arquivo JSON
-        with open("app/controllers/db/user_accounts.json", "w") as arquivo_json:
+        with open("app/controllers/db/user_accounts.json", "w", encoding='utf-8') as arquivo_json:
             user_data = [vars(user_account) for user_account in \
             self.__user_accounts]
             json.dump(user_data, arquivo_json, indent=4)
@@ -88,7 +88,7 @@ class DataRecord:
 
     def save_users(self):
         # Salva os usuários de volta no arquivo JSON
-        with open("app/controllers/db/user_accounts.json", "w") as arquivo_json:
+        with open("app/controllers/db/user_accounts.json", "w", encoding='utf-8') as arquivo_json:
             user_data = [vars(user_account) for user_account in self.__user_accounts]
             json.dump(user_data, arquivo_json, indent=4)
     
@@ -106,7 +106,7 @@ class Post:
         posts_existentes.append(vars(new_post))  # Converte o post para um dicionário
         
         # Escreve a lista atualizada de posts de volta para o arquivo JSON
-        with open("app/controllers/db/posts-blog.json", "w",encoding="utf-8") as arquivo_json:
+        with open("app/controllers/db/posts-blog.json", "w", encoding="utf-8") as arquivo_json:
             json.dump(posts_existentes, arquivo_json, indent=4, ensure_ascii=False)
             
             
@@ -156,6 +156,6 @@ class Post:
 
     def save_posts(self):
         # Salva os post de volta pro arquivo json
-        with open("app/controllers/db/posts-blog.json", "w") as arquivo_json:
+        with open("app/controllers/db/posts-blog.json", "w", encoding='utf-8') as arquivo_json:
             post_data = [vars(posts_Blog) for posts_Blog in self.posts_Blog]
             json.dump(post_data, arquivo_json, indent=4)
