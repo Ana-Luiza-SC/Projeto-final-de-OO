@@ -133,27 +133,29 @@ class Post:
         
     def edit_post(self, titulo, novos_dados):
         """Edita um post existente com base no título."""
-        posts_existentes = self.get_posts()
+        #posts_existentes = self.get_posts()
         
-        for post_data in posts_existentes:
-            if post_data['titulo'] == titulo:
-                post_data.update(novos_dados)  # Atualiza os dados do post
+        for post_data in self.posts_Blog:
+            if post_data.titulo == titulo:
+                post_data.autor == novos_dados.get('autor', post_data.autor) # Atualiza os dados do post
+                post_data.conteudo == novos_dados.get('conteudo', post_data.conteudo)
+                post_data.data == novos_dados.get('data', post_data.data)
+                break
+        self.save_posts()
                 
-                # Escreve a lista atualizada de posts de volta para o arquivo JSON
-                with open("app/controllers/db/posts-blog.json", "w", encoding="utf-8") as arquivo_json:
-                    json.dump(posts_existentes, arquivo_json, indent=4, ensure_ascii=False)
-                return True
         
         return False  # Retorna False se o post com o título especificado não for encontrado
 
     def delete_post(self, titulo):
         """Remove um post existente com base no título."""
-        posts_existentes = self.get_posts()
-        
+        self.posts_Blog = [post for post in self.posts_Blog if post.titulo != titulo]
+        self.save_posts()
         # Filtra os posts, mantendo apenas aqueles que não correspondem ao título especificado
-        posts_restantes = [post_data for post_data in posts_existentes if post_data['titulo'] != titulo]
+        #posts_restantes = [post_data for post_data in posts_existentes if post_data['titulo'] != titulo]
 
-        # Escreve a lista atualizada de posts de volta para o arquivo JSON
-        with open("app/controllers/db/posts-blog.json", "w", encoding="utf-8") as arquivo_json:
-            json.dump(posts_restantes, arquivo_json, indent=4, ensure_ascii=False)
 
+    def save_posts(self):
+        # Salva os post de volta pro arquivo json
+        with open("app/controllers/db/posts-blog.json", "w") as arquivo_json:
+            post_data = [vars(posts_Blog) for posts_Blog in self.posts_Blog]
+            json.dump(post_data, arquivo_json, indent=4)

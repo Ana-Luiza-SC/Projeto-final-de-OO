@@ -1,11 +1,11 @@
 [
     {
         "username": "Moura",
-        "password": "456789",
+        "password": null,
         "name": "Henrique",
         "age": "6",
         "email": "sem@email.com",
-        "type": "user"
+        "type": "adm"
     },
     {
         "username": "Henrique",
@@ -22,5 +22,13 @@
         "age": "5",
         "email": "sim@sem.com",
         "type": "adm"
+    },
+    {
+        "username": "Vilbs",
+        "password": "1",
+        "name": "VIlmar",
+        "age": "13",
+        "email": "aaa@aa",
+        "type": "user"
     }
 ]

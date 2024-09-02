@@ -143,16 +143,20 @@ class Application():
             return template('app/views/html/post_control', transfered=False, current_user=None)
 
     def edit_post(self, title, new_data):  # Atualiza o post pelo título
+        # Verifica se o usuário logado é administrador
+        session_id = self.get_session_id()
+        current_user = self.__model.getCurrentUser(session_id)
         posts = self.__posts.get_posts()
-        for post in posts:
-            if post['title'] == title:
-                post.update(new_data)
-                break
-        self.__posts.save_posts(posts)
-
+        if current_user and current_user.type == "adm":
+            for post in posts:
+                if post['titulo'] == title:
+                    self.__posts.edit_post(title, new_data)
+                    break
+            return redirect('/post_adm')
 
     def delete_post(self, title):  # Remove o post
         self.__posts.delete_post(title)
+        return redirect('/post_adm')
 
         
 #---------------------- página de controle de usuários ----------------------------------------------

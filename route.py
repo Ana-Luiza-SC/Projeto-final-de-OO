@@ -103,8 +103,7 @@ def edit_post(post_title):
         'title': request.forms.get('title'),
         'content': request.forms.get('content')
     }
-    ctl.edit_post(post_title, new_data)  # Passa o título e new_data como argumento
-    return redirect('/post_adm')
+    return ctl.edit_post(post_title, new_data)  # Passa o título e new_data como argumento
 
 # ---------- Admin Pages --------------------------------------------------------
 
