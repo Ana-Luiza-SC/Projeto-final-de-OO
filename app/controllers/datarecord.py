@@ -34,7 +34,7 @@ class DataRecord:
         with open("app/controllers/db/user_accounts.json", "w", encoding='utf-8') as arquivo_json:
             user_data = [vars(user_account) for user_account in \
             self.__user_accounts]
-            json.dump(user_data, arquivo_json, indent=4)
+            json.dump(user_data, arquivo_json, indent=4, ensure_ascii=False)
 
     def getCurrentUser(self, session_id):
         # Retorna o usuário associado ao session_id, se existir
@@ -97,7 +97,7 @@ class DataRecord:
         file_path = "app/controllers/db/user_accounts.json"
         # Cria um arquivo temporário
         with tempfile.NamedTemporaryFile('w', delete=False, dir=os.path.dirname(file_path), encoding='utf-8') as tmpfile:
-            json.dump([vars(user_account) for user_account in self.__user_accounts], tmpfile, indent=4)
+            json.dump([vars(user_account) for user_account in self.__user_accounts], tmpfile, indent=4, ensure_ascii=False)
             tempname = tmpfile.name
         # Substitui o arquivo original pelo temporário
         os.replace(tempname, file_path)
