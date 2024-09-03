@@ -199,7 +199,7 @@
                     <tr>
                         <td>{{ post['titulo'] }}</td>
                         <td>{{ post['conteudo'] }}</td>
-                        <td>{{ post['autor'] }}</td>
+                        <td>{{ post['autor']['name'] }}</td>
                         <td>{{ post['data'] }}</td>
                         <td>
                             <!-- Botão para exibir o formulário de edição -->

@@ -105,22 +105,12 @@ class DataRecord:
     
 class Post:
     def __init__(self):
-        # Lista para armazenar os posts
         self.posts_Blog = []
         self.get_posts()
-        #self.read()
+        self.read()
 
     def criar_post(self, autor: UserAccount, titulo, conteudo, data):
-        new_post = {
-            "autor": {
-                "username": autor.username,
-                "name": autor.name,
-                "email": autor.email
-            },
-            "titulo": titulo,
-            "conteudo": conteudo,
-            "data": data
-        }
+        new_post = post(autor,titulo,conteudo, data)
         
         self.posts_Blog.append(new_post)
         self.save_posts()
@@ -129,11 +119,12 @@ class Post:
             
     def read(self):
         try:
-            with open("app/controllers/db/posts-blog.json", "r",encoding='utf-8') as arquivo_json:
+            with open("app/controllers/db/posts-blog.json", "r", encoding='utf-8') as arquivo_json:
                 post_data = json.load(arquivo_json)
-                self.posts_Blog = [post(**data) for data in post_data]
+                self.posts_Blog = [post.from_dict(data) for data in post_data]
         except FileNotFoundError:
             self.posts_Blog = []
+
 
     def get_posts(self):
         """Lê os posts do arquivo JSON e retorna uma lista de dicionários."""
@@ -173,6 +164,6 @@ class Post:
     def save_posts(self):
         try:
             with open("app/controllers/db/posts-blog.json", "w", encoding='utf-8') as file:
-                json.dump(self.posts_Blog, file, indent=4, ensure_ascii=False)
+                json.dump([post.to_dict() for post in self.posts_Blog], file, indent=4, ensure_ascii=False)
         except IOError as e:
             print(f"Erro ao salvar posts: {e}")

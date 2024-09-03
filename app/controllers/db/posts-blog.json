@@ -1,22 +1,54 @@
 [
     {
         "autor": {
-            "username": "johndoe",
+            "username": "john_doe",
+            "password": "password123",
             "name": "John Doe",
-            "email": "johndoe@example.com"
+            "age": 30,
+            "email": "john.doe@example.com",
+            "type": "adm"
         },
-        "titulo": "Como Aprender Python",
-        "conteudo": "Neste post, discutiremos as melhores práticas para aprender Python, incluindo recursos recomendados e estratégias de estudo.",
-        "data": "2024-09-01"
+        "titulo": "Primeiro Post",
+        "conteudo": "Este é o conteúdo do primeiro post.",
+        "data": "2024-09-01T10:00:00"
     },
     {
         "autor": {
-            "username": "janedoe",
-            "name": "Jane Doe",
-            "email": "janedoe@example.com"
+            "username": "jane_smith",
+            "password": "password456",
+            "name": "Jane Smith",
+            "age": 28,
+            "email": "jane.smith@example.com",
+            "type": "adm"
         },
-        "titulo": "Introdução ao Machine Learning",
-        "conteudo": "Este post oferece uma introdução ao conceito de Machine Learning, abordando suas principais aplicações e algoritmos.",
-        "data": "2024-08-15"
+        "titulo": "Segundo Post",
+        "conteudo": "Este é o conteúdo do segundo post.",
+        "data": "2024-09-02T11:00:00"
+    },
+    {
+        "autor": {
+            "username": "Ana",
+            "password": "1",
+            "name": "Ana Luiza",
+            "age": "35",
+            "email": "ana@exemplo.com",
+            "type": "adm"
+        },
+        "titulo": "Tomara que funcione",
+        "conteudo": "Vai funcionar sim, AMÃM",
+        "data": "2024-09-03"
+    },
+    {
+        "autor": {
+            "username": "Vilmar",
+            "password": "2",
+            "name": "Vilmar JosÃ©",
+            "age": "20",
+            "email": "vilmar@exemplo.com",
+            "type": "adm"
+        },
+        "titulo": "5 motivos que eu sou gay",
+        "conteudo": "VÃ¡rios, por motivos de sem ter tempos, n vou  falar",
+        "data": "2024-09-03"
     }
 ]

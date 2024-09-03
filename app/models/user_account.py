@@ -21,15 +21,35 @@ class UserAccount:
         }
 
 class post:
-    def __init__(self, autor_username, titulo, conteudo, data):
-        self.autor_username = autor_username
+    def __init__(self, autor: UserAccount, titulo, conteudo, data):
+        self.autor = {
+            "username": autor.username,
+            "password": autor.password,
+            "name": autor.name,
+            "age": autor.age,
+            "email": autor.email,
+            "type": autor.type
+        }
         self.titulo = titulo
         self.conteudo = conteudo
         self.data = data
 
+    @classmethod
+    def from_dict(cls, data):
+        autor_data = data['autor']
+        autor = UserAccount(
+            autor_data['username'],
+            autor_data['password'],
+            autor_data['name'],
+            autor_data['age'],
+            autor_data['email'],
+            autor_data['type']
+        )
+        return cls(autor, data['titulo'], data['conteudo'], data['data'])
+
     def to_dict(self):
         return {
-            "autor_username": self.autor_username,
+            "autor": self.autor,
             "titulo": self.titulo,
             "conteudo": self.conteudo,
             "data": self.data
