@@ -131,8 +131,13 @@ class Application():
             return template('app/views/html/post', \
                 transfered=False, current_user = None)
     
-    def action_post(self,autor, titulo, conteudo, data): # guarda o novo post
+    def action_post(self, titulo, conteudo, data):
+        session_id = self.get_session_id()  # Obtém o ID da sessão atual
+        user = self.__model.getCurrentUser(session_id)  # Obtém o usuário atual
+        autor = user  # O autor do post é o usuário atual
+            
         self.__posts.criar_post(autor, titulo, conteudo, data)
+
         
     def post_control(self): #página responsável para a remoção e edição dos post
         response.content_type = 'text/html; charset=utf-8'
@@ -219,3 +224,15 @@ class Application():
             return redirect('/area_adm')
         else:
             return "Acesso negado. Somente administradores podem excluir usuários."
+        
+        
+    def user_edit_user(self, username, new_data): ## do próprio usuário
+        # Verifica se o usuário logado é administrador
+        response.content_type = 'text/html; charset=utf-8'
+        self.__model.update_user(username, new_data)
+        return redirect('/pagina')
+
+    def user_delete_user(self, username):
+
+        self.__model.delete_user(username)
+        return redirect('/')

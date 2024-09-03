@@ -137,7 +137,7 @@
                 % for post in current_post:
                         <h3>{{ post['titulo'] }}</h3>  <!-- Acessando a chave 'titulo' de um dicionário -->
                         <p>{{ post['conteudo'] }}</p>
-                        <p>Autor: {{ post['autor'] }}</p>
+                        <p>Autor: {{ post['autor']['name'] }}</p>
                         <p>Data: {{ post['data'] }}</p>
                     % end
             </article>

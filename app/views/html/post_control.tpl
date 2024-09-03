@@ -163,7 +163,7 @@
                 <td><h1>Controle de Posts</h1></td>
                 <td style="text-align:right;">
                     % if transfered:
-                        <a href="/blog">Área de usuário</a>
+                        <a href="/blog">Área do Blog</a>
                         <a href="/pagina">Área do usuário</a>
                         % if current_user is not None and current_user.type == "adm":
                             <a href="/area_adm">Área do administrador</a>

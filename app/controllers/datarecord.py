@@ -1,6 +1,8 @@
-from app.models.user_account import UserAccount, text, post, comentario
+from app.models.user_account import UserAccount, post
 import json
 import uuid 
+import os
+import tempfile
 
 class DataRecord:
     """Banco de dados JSON para o recurso Usuários"""
@@ -73,7 +75,10 @@ class DataRecord:
         # Atualiza os dados de um usuário existente
         for user in self.__user_accounts:
             if user.username == username:
-                user.password = new_data.get('password', user.password)
+                # Atualiza a senha somente se uma nova senha for fornecida
+                if 'password' in new_data and new_data['password']:
+                    user.password = new_data['password']
+                # Atualiza os demais dados
                 user.name = new_data.get('name', user.name)
                 user.age = new_data.get('age', user.age)
                 user.email = new_data.get('email', user.email)
@@ -81,16 +86,22 @@ class DataRecord:
                 break
         self.save_users()
 
+
     def delete_user(self, username):
         # Remove um usuário da lista
         self.__user_accounts = [user for user in self.__user_accounts if user.username != username]
         self.save_users()
 
     def save_users(self):
-        # Salva os usuários de volta no arquivo JSON
-        with open("app/controllers/db/user_accounts.json", "w", encoding='utf-8') as arquivo_json:
-            user_data = [vars(user_account) for user_account in self.__user_accounts]
-            json.dump(user_data, arquivo_json, indent=4)
+        # Caminho para o arquivo original
+        file_path = "app/controllers/db/user_accounts.json"
+        # Cria um arquivo temporário
+        with tempfile.NamedTemporaryFile('w', delete=False, dir=os.path.dirname(file_path), encoding='utf-8') as tmpfile:
+            json.dump([vars(user_account) for user_account in self.__user_accounts], tmpfile, indent=4)
+            tempname = tmpfile.name
+        # Substitui o arquivo original pelo temporário
+        os.replace(tempname, file_path)
+
     
 class Post:
     def __init__(self):
@@ -99,22 +110,28 @@ class Post:
         self.get_posts()
         #self.read()
 
-    def criar_post(self, autor, titulo, conteudo, data):
-        posts_existentes = self.get_posts()
-        new_post = post(autor, titulo, conteudo, data)
+    def criar_post(self, autor: UserAccount, titulo, conteudo, data):
+        new_post = {
+            "autor": {
+                "username": autor.username,
+                "name": autor.name,
+                "email": autor.email
+            },
+            "titulo": titulo,
+            "conteudo": conteudo,
+            "data": data
+        }
         
-        # Adiciona o novo post à lista existente de posts
-        posts_existentes.append(vars(new_post))  # Converte o post para um dicionário
-        
-        # Escreve a lista atualizada de posts de volta para o arquivo JSON
+        self.posts_Blog.append(new_post)
         self.save_posts()
-            
+
+
             
     def read(self):
         try:
             with open("app/controllers/db/posts-blog.json", "r",encoding='utf-8') as arquivo_json:
                 post_data = json.load(arquivo_json)
-                self.posts_Blog = [Post(**data) for data in post_data]
+                self.posts_Blog = [post(**data) for data in post_data]
         except FileNotFoundError:
             self.posts_Blog = []
 
@@ -130,6 +147,7 @@ class Post:
         except json.JSONDecodeError:
             print("Erro: O arquivo JSON está mal formatado.")
             return []
+
         
     def edit_post(self, titulo, novos_dados):
         """Edita um post existente com base no título."""
@@ -142,8 +160,6 @@ class Post:
                 post_data.data = novos_dados.get('data', post_data.data)
                 break
         self.save_posts()
-                
-        
         return False  # Retorna False se o post com o título especificado não for encontrado
 
     def delete_post(self, titulo):
@@ -155,7 +171,8 @@ class Post:
 
 
     def save_posts(self):
-        # Salva os post de volta pro arquivo json
-        with open("app/controllers/db/posts-blog.json", "w", encoding='utf-8') as arquivo_json:
-            post_data = [vars(posts_Blog) for posts_Blog in self.posts_Blog]
-            json.dump(post_data, arquivo_json, indent=4)
+        try:
+            with open("app/controllers/db/posts-blog.json", "w", encoding='utf-8') as file:
+                json.dump(self.posts_Blog, file, indent=4, ensure_ascii=False)
+        except IOError as e:
+            print(f"Erro ao salvar posts: {e}")

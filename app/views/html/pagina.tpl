@@ -94,8 +94,72 @@
             background-color: #4a235a;
         }
 
-        
-</style>
+        .table_users {
+            width: 80%;
+            margin: 0 auto 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #6c3483;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        td button {
+            padding: 5px 10px;
+            background-color: #6c3483;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s;
+        }
+
+        td button:hover {
+            background-color: #4a235a;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        form input, form select, form button {
+            width: 200px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        form button {
+            background-color: #6c3483;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #4a235a;
+        }
+
+        .edit-form {
+            display: none; /* Começa oculto */
+        }
+    </style>
 </head>
 <body>
 
@@ -115,25 +179,59 @@
         </table>
     </div>
 
-</body>
-
     <div class="content">
         % if transfered:
             <h2>Dados do Usuário:</h2>
             <p>Username: {{current_user.username}}</p>
-            <p>Password: {{current_user.password}}</p>
-            <p>Password: {{current_user.name}}</p>
-            <p>Password: {{current_user.age}}</p>
-            <p>Password: {{current_user.email}}</p>
-            <p>idade: {{current_user.age}}</p>
+            <p>Nome: {{current_user.name}}</p>
+            <p>Idade: {{current_user.age}}</p>
+            <p>Email: {{current_user.email}}</p>
             <form class="button-center" action="/logout" method="post">
                 <button type="submit">Sair</button>
             </form>
+
+            <h2>Gerenciar Usuário</h2>
+            <table class="table_users">
+                        <!-- Botão para exibir o formulário de edição -->
+                        <button type="button" onclick="toggleEditForm('{{ current_user.username }}')">Editar</button>
+
+                    <!-- Formulário de edição -->
+                    <div id="edit-form-{{ current_user.username }}" class="edit-form">
+                        <form class="button-center" action="/user_edit_user/{{ current_user.username }}" method="POST">
+                            <input type="text" name="name" value="{{ current_user.name }}" placeholder="Nome" required>
+                            <input type="number" name="age" value="{{ current_user.age }}" placeholder="Idade" required>
+                            <input type="email" name="email" value="{{ current_user.email }}" placeholder="Email" required>
+                            <input type="password" name="password" placeholder="Nova Senha (opcional)">
+                            <button type="submit">Salvar</button>
+                        </form>
+                    </div>
+
+
+                        <!-- Formulário de exclusão -->
+                        <form class="button-center" action="/user_delete_user/{{ current_user.username }}" method="POST" style="display:inline;">
+                            <button type="submit">Excluir</button>
+                        </form>
+
+                    </td>
+                </tr>
+            </table>
 
         % else:
             <h2>Houve um erro no login ou você não está autenticado.</h2>
             <a href="/portal">Faça seu login</a>
         % end
     </div>
+
+    <script>
+    function toggleEditForm(username) {
+        var form = document.getElementById('edit-form-' + username);
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block'; // Exibe o formulário
+        } else {
+            form.style.display = 'none'; // Oculta o formulário
+        }
+    }
+    </script>
+
 </body>
 </html>

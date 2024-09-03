@@ -95,13 +95,13 @@ def area_post():
 @app.route('/novo_post', method='POST')
 def action_novo_post():
     response.content_type = 'text/html; charset=utf-8'
-    autor = request.forms.get('Autor')
     titulo = request.forms.get('Titulo')
     conteudo = request.forms.get('Conteudo')
     data = date.today().strftime('%Y-%m-%d')
-
-    ctl.action_post(autor, titulo, conteudo, data)
+    
+    ctl.action_post(titulo, conteudo, data)
     return redirect('/blog')
+
 
 @app.route('/post_adm', method='GET')
 def post_control():
@@ -157,6 +157,25 @@ def edit_user(username):
 def delete_user(username):
     response.content_type = 'text/html; charset=utf-8'
     return ctl.delete_user(username)
+
+@app.route('/user_edit_user/<username>', method='POST')
+def edit_user(username):
+    response.content_type = 'text/html; charset=utf-8'
+    new_data = {
+        'password': request.forms.get('password'),
+        'name': request.forms.get('name'),
+        'age': request.forms.get('age'),
+        'email': request.forms.get('email'),
+        'type': request.forms.get('type')
+    }
+    return ctl.user_edit_user(username, new_data)
+
+
+@app.route('/user_delete_user/<username>', method='POST')
+def delete_user(username):
+    response.content_type = 'text/html; charset=utf-8'
+    return ctl.user_delete_user(username)
+
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
