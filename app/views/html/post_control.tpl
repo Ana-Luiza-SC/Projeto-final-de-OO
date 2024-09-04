@@ -1,4 +1,3 @@
-% from route import sanitize_string
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -203,9 +202,9 @@
                         <td>{{ post['data'] }}</td>
                         <td>
                             <!-- Botão para exibir o formulário de edição -->
-                            <button type="button" onclick="toggleEditForm('{{ sanitize_string(post['titulo']) }}')">Editar</button>
-                            <div id="edit-form-{{ sanitize_string(post['titulo']) }}" class="edit-form">
-                                <form action="/edit_post/{{ sanitize_string(post['titulo']) }}" method="POST">
+                            <button type="button" onclick="toggleEditForm('{{ post['titulo'] }}')">Editar</button>
+                            <div id="edit-form-{{ post['titulo'] }}" class="edit-form">
+                                <form action="/edit_post/{{ post['titulo'] }}" method="POST">
                                 <input type="text" name="titulo" value="{{ post['titulo'] }}" placeholder="Titulo" required>
                                     <input type="text" name="conteudo" value="{{ post['conteudo'] }}" placeholder="Conteudo" required>
                                     <input type="text" name="autor" value="{{ post['autor'] }}" placeholder="Autor" required>
@@ -213,7 +212,7 @@
                                     <button type="submit">Salvar</button>
                                     </form>
                             </div>
-                            <form action="/delete_post/{{ sanitize_string(post['titulo']) }}" method="POST" style="display:inline;">
+                            <form action="/delete_post/{{ post['titulo'] }}" method="POST" style="display:inline;">
                                 <button type="submit">Excluir</button>
                             </form>
                         </td>
