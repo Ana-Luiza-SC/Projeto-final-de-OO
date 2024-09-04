@@ -144,7 +144,6 @@ class Post:
         titulo_modificado = titulo.replace("_", " ")
         
         for post_data in self.posts_Blog:
-            print(post_data.titulo == titulo_modificado)
             if post_data.titulo == titulo_modificado:
                 post_data.conteudo = novos_dados.get('conteudo', post_data.conteudo)
                 post_data.data = novos_dados.get('data', post_data.data)
