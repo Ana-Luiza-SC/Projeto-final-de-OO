@@ -34,7 +34,7 @@ class DataRecord:
         with open("app/controllers/db/user_accounts.json", "w", encoding='utf-8') as arquivo_json:
             user_data = [vars(user_account) for user_account in \
             self.__user_accounts]
-            json.dump(user_data, arquivo_json, indent=4)
+            json.dump(user_data, arquivo_json, indent=4, ensure_ascii=False)
 
     def getCurrentUser(self, session_id):
         # Retorna o usuário associado ao session_id, se existir
@@ -97,7 +97,7 @@ class DataRecord:
         file_path = "app/controllers/db/user_accounts.json"
         # Cria um arquivo temporário
         with tempfile.NamedTemporaryFile('w', delete=False, dir=os.path.dirname(file_path), encoding='utf-8') as tmpfile:
-            json.dump([vars(user_account) for user_account in self.__user_accounts], tmpfile, indent=4)
+            json.dump([vars(user_account) for user_account in self.__user_accounts], tmpfile, indent=4, ensure_ascii=False)
             tempname = tmpfile.name
         # Substitui o arquivo original pelo temporário
         os.replace(tempname, file_path)
@@ -141,24 +141,23 @@ class Post:
 
         
     def edit_post(self, titulo, novos_dados):
-        """Edita um post existente com base no título."""
-        #posts_existentes = self.get_posts()
+        titulo_modificado = titulo.replace("_", " ")
         
         for post_data in self.posts_Blog:
-            if post_data.titulo == titulo:
-                post_data.autor = novos_dados.get('autor', post_data.autor) # Atualiza os dados do post
+            print(post_data.titulo == titulo_modificado)
+            if post_data.titulo == titulo_modificado:
                 post_data.conteudo = novos_dados.get('conteudo', post_data.conteudo)
                 post_data.data = novos_dados.get('data', post_data.data)
                 break
         self.save_posts()
         return False  # Retorna False se o post com o título especificado não for encontrado
-
+    
     def delete_post(self, titulo):
         """Remove um post existente com base no título."""
+        print(f"Título para deletar: {titulo}")
+        print(f"Títulos existentes: {[post.titulo for post in self.posts_Blog]}")
         self.posts_Blog = [post for post in self.posts_Blog if post.titulo != titulo]
         self.save_posts()
-        # Filtra os posts, mantendo apenas aqueles que não correspondem ao título especificado
-        #posts_restantes = [post_data for post_data in posts_existentes if post_data['titulo'] != titulo]
 
 
     def save_posts(self):

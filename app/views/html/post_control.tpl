@@ -176,7 +176,7 @@
     </div>
 
     <div class="content">
-        % if not transfered:
+                % if not transfered:
             <h2>Houve erro no login do usuário</h2>
             <a href="/portal">Faça seu login</a>
         
@@ -184,7 +184,6 @@
             <h2>Você não tem acesso a esta página, volte para:</h2>
             <a href="/pagina">Área do usuário</a>
             <a href="/blog">Área dos Blogs</a>
-
         % else:
             <h2>Gerenciar Posts</h2>
             <table class="table_posts">
@@ -208,12 +207,11 @@
                                 <form action="/edit_post/{{ sanitize_string(post['titulo']) }}" method="POST">
                                 <input type="text" name="titulo" value="{{ post['titulo'] }}" placeholder="Titulo" required>
                                     <input type="text" name="conteudo" value="{{ post['conteudo'] }}" placeholder="Conteudo" required>
-                                    <input type="text" name="autor" value="{{ post['autor'] }}" placeholder="Autor" required>
                                     <input type="text" name="data" value="{{ post['data'] }}" placeholder="Data" required>
                                     <button type="submit">Salvar</button>
                                     </form>
                             </div>
-                            <form action="/delete_post/{{ sanitize_string(post['titulo']) }}" method="POST" style="display:inline;">
+                            <form action="/delete_post/{{ post['titulo'] }}" method="POST" style="display:inline;">
                                 <button type="submit">Excluir</button>
                             </form>
                         </td>

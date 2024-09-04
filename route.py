@@ -106,20 +106,21 @@ def action_novo_post():
 @app.route('/post_adm', method='GET')
 def post_control():
     response.content_type = 'text/html; charset=utf-8'
-    return ctl.render('post_control') # Chama o método correto para exibir a página de controle dos posts
+    return ctl.render('post_control') 
 
 @app.route('/delete_post/<post_title>', method='POST')
 def delete_post(post_title):
-    response.content_type = 'text/html; charset=utf-8'
+    post_title =post_title 
     ctl.delete_post(post_title)
     return redirect('/post_adm')
 
+
 @app.route('/edit_post/<post_title>', method='POST')
 def edit_post(post_title):
-    response.content_type = 'text/html; charset=utf-8'
     new_data = {
-        'title': request.forms.get('title'),
-        'content': request.forms.get('content')
+        'title': request.forms.get('titulo'),
+        'conteudo': request.forms.get('conteudo'),
+        'data': request.forms.get('data')
     }
     return ctl.edit_post(post_title, new_data)  # Passa o título e new_data como argumento
 
