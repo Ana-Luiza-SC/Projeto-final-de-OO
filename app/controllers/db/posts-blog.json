@@ -50,5 +50,18 @@
         "titulo": "5 motivos que eu sou gay",
         "conteudo": "VÃ¡rios, por motivos de sem ter tempos, n vou  falar",
         "data": "2024-09-03"
+    },
+    {
+        "autor": {
+            "username": "Ana",
+            "password": "1",
+            "name": "Ana Luiza",
+            "age": "35",
+            "email": "ana@exemplo.com",
+            "type": "adm"
+        },
+        "titulo": "Post 34'",
+        "conteudo": "sem nada",
+        "data": "2024-09-04"
     }
 ]

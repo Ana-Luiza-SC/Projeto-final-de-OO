@@ -148,8 +148,6 @@ class Application():
         elif self.is_authenticated(username):
             user = self.__model.getCurrentUser(session_id)
             post = self.__posts.get_posts()
-            for teste in post:
-                print(teste.autor.username)
             return template('app/views/html/post_control', transfered=True, current_user=user, current_post=post)
         else:
             return template('app/views/html/post_control', transfered=False, current_user=None)

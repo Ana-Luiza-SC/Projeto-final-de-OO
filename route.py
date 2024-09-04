@@ -106,7 +106,7 @@ def action_novo_post():
 @app.route('/post_adm', method='GET')
 def post_control():
     response.content_type = 'text/html; charset=utf-8'
-    return ctl.post_control()  # Chama o método correto para exibir a página de controle dos posts
+    return ctl.render('post_control') # Chama o método correto para exibir a página de controle dos posts
 
 @app.route('/delete_post/<post_title>', method='POST')
 def delete_post(post_title):
