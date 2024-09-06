@@ -18,7 +18,7 @@ class DataRecord:
     def read(self):
         try:
             # Tenta abrir e ler o arquivo JSON que contém as contas de usuários
-            with open("app/controllers/db/user_accounts.json", "r", encoding='utf-8') as arquivo_json:
+            with open("app/controllers/db/user_accounts.json", "r", encoding='utf-8-sig') as arquivo_json:
                 user_data = json.load(arquivo_json)
                 # Converte os dados do JSON em objetos UserAccount
                 self.__user_accounts = [UserAccount(**data) for data in user_data]
@@ -31,10 +31,11 @@ class DataRecord:
         new_user= UserAccount(username,password,name,age,email,type)
         self.__user_accounts.append(new_user)
         # Escreve a lista atualizada de usuários de volta no arquivo JSON
-        with open("app/controllers/db/user_accounts.json", "w", encoding='utf-8') as arquivo_json:
+        with open("app/controllers/db/user_accounts.json", "w", encoding='utf-8-sig') as arquivo_json:
             user_data = [vars(user_account) for user_account in \
             self.__user_accounts]
             json.dump(user_data, arquivo_json, indent=4, ensure_ascii=False)
+# ! CORRIGIR UTF-SIG
 
     def getCurrentUser(self, session_id):
         # Retorna o usuário associado ao session_id, se existir
@@ -96,7 +97,7 @@ class DataRecord:
         # Caminho para o arquivo original
         file_path = "app/controllers/db/user_accounts.json"
         # Cria um arquivo temporário
-        with tempfile.NamedTemporaryFile('w', delete=False, dir=os.path.dirname(file_path), encoding='utf-8') as tmpfile:
+        with tempfile.NamedTemporaryFile('w', delete=False, dir=os.path.dirname(file_path), encoding='utf-8-sig') as tmpfile:
             json.dump([vars(user_account) for user_account in self.__user_accounts], tmpfile, indent=4, ensure_ascii=False)
             tempname = tmpfile.name
         # Substitui o arquivo original pelo temporário
@@ -119,7 +120,7 @@ class Post:
             
     def read(self):
         try:
-            with open("app/controllers/db/posts-blog.json", "r", encoding='utf-8') as arquivo_json:
+            with open("app/controllers/db/posts-blog.json", "r", encoding='utf-8-sig') as arquivo_json:
                 post_data = json.load(arquivo_json)
                 self.posts_Blog = [post.from_dict(data) for data in post_data]
         except FileNotFoundError:
@@ -129,7 +130,7 @@ class Post:
     def get_posts(self):
         """Lê os posts do arquivo JSON e retorna uma lista de dicionários."""
         try:
-            with open("app/controllers/db/posts-blog.json", "r", encoding='utf-8') as file:
+            with open("app/controllers/db/posts-blog.json", "r", encoding='utf-8-sig') as file:
                 data = json.load(file)
                 return data  # Retorna a lista de posts
         except FileNotFoundError:
@@ -161,7 +162,7 @@ class Post:
 
     def save_posts(self):
         try:
-            with open("app/controllers/db/posts-blog.json", "w", encoding='utf-8') as file:
+            with open("app/controllers/db/posts-blog.json", "w", encoding='utf-8-sig') as file:
                 json.dump([post.to_dict() for post in self.posts_Blog], file, indent=4, ensure_ascii=False)
         except IOError as e:
             print(f"Erro ao salvar posts: {e}")

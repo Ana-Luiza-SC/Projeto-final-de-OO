@@ -162,7 +162,7 @@
                 
                 <td style="text-align:right;">
                     %if transfered:
-                        <a href="/blog">Área de usuário</a>
+                        <a href="/blog">Área do Blog</a>
                         <a href="/pagina">Área do usuário</a>
 
                         % if current_user.type == "adm":
