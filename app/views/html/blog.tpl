@@ -10,14 +10,26 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background-color: #090D1F;
         }
+
+        .top {
+            color: #FFF;
+            font-family: Inter;
+            font-size: 70px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            text-align: center; /* Centraliza o texto dentro do contêiner */
+            max-width: 100%; /* Remove a largura fixa */
+        }
+
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #6c3483;
+            background-color: #090D1F;
             color: white;
             height: 50px;
             display: flex;
@@ -49,7 +61,7 @@
             font-size: 16px;
         }
         .navbar a:hover {
-            background-color: #4a235a;
+            background-color: #273570;
         }
 
         .content {
@@ -58,7 +70,7 @@
         }
 
         .content h2 {
-            color: #4a235a;
+            color: #FFFFFF;
             font-size: 24px;
             margin-bottom: 10px;
             font-family: 'Oswald', sans-serif;
@@ -66,7 +78,7 @@
         }
 
         .content h3 {
-            color: #4a235a;
+            color: #FFFFFF;
             font-size: 20px;
             margin-bottom: 10px;
             font-family: 'Oswald', sans-serif;
@@ -76,7 +88,7 @@
         /* Estilização para o conteúdo dos posts */
         .content p {
             font-size: 18px;
-            color: #666;
+            color: #C0C5D0;
             line-height: 1.6;
             margin-bottom: 20px;
             text-align: center; 
@@ -93,7 +105,7 @@
         .content a {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #6c3483;
+            background-color: #090D1F;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -110,6 +122,7 @@
     </style>
 </head>
 <body>
+    <!-- Navbar -->
     <div class="navbar">
         <table>
             <tr>
@@ -120,26 +133,31 @@
                         <a href="/area_adm">Área do administrador</a>
                         <a href="/post">Criar Post</a>
                         <a href="/post_adm">Controle dos Posts</a>
-                    %end
+                    % end
                 </td>
             </tr>
         </table>
     </div>
 
+    <!-- Título principal -->
+    <div class="top">
+        <h1>Guia de estudos</h1>
+    </div>
+
+    <!-- Conteúdo dos posts -->
     <div class="content">
         % if transfered == True: 
             % if current_user.type == "adm":
-                <h2>Você é um adm</h2> 
-
+                <h2>Você é um administrador</h2>
             % end
-            <h2>Área do blog</h2>
+
             <article>
                 % for post in current_post:
-                        <h3>{{ post['titulo'] }}</h3>  <!-- Acessando a chave 'titulo' de um dicionário -->
-                        <p>{{ post['conteudo'] }}</p>
-                        <p>Autor: {{ post['autor']['name'] }}</p>
-                        <p>Data: {{ post['data'] }}</p>
-                    % end
+                    <h3>{{ post['titulo'] }}</h3>  <!-- Acessando a chave 'titulo' de um dicionário -->
+                    <p>{{ post['conteudo'] }}</p>
+                    <p>Autor: {{ post['autor']['name'] }}</p>
+                    <p>Data: {{ post['data'] }}</p>
+                % end
             </article>
         % else: 
             <h2>Houve erro no login do usuário</h2>
