@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background: #090D1F;
         }
 
         .navbar {
@@ -18,7 +18,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #6c3483; /* Cor da barra superior */
+            background-color: #090D1F; /* Cor da barra superior */
             color: white;
             height: 50px; /* Altura ajustada da barra superior */
             display: flex;
@@ -53,7 +53,7 @@
         }
 
         .navbar a:hover {
-            background-color: #4a235a; /* Cor do botão ao passar o mouse */
+            background-color: #273570; /* Cor do botão ao passar o mouse */
         }
 
         .content {
@@ -63,13 +63,17 @@
         }
 
         .content h1 {
-            color: #003366;
-            font-size: 36px;
+            color: #FFF;
+            font-family: Inter;
+            font-size: 90px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
         }
 
         .content p {
             font-size: 18px;
-            color: #666;
+            color: #FFFFFF;
         }
     </style>
 </head>
@@ -88,7 +92,8 @@
     </div>
 
     <div class="content">
-        <h1>Bem-vindo à Página Inicial</h1>
+        <h1>Bem-vindo(a) à Página Inicial do</h1>
+        <h1>Guia de estudos</h1>
         <p>Clique em "Login" no canto superior direito para acessar sua conta.</p>
     </div>
 </body>

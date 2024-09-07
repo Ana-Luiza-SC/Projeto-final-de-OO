@@ -10,8 +10,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background: #090D1F
             height: 100vh;
             margin: 0;
+            padding: 0;
             font-family: 'Roboto', sans-serif; /* Aplica Roboto Bold ao corpo */
         }
 
@@ -20,7 +22,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #6c3483; /* Cor da barra superior */
+            background-color: #090D1F; /* Cor da barra superior */
             color: white;
             height: 50px; /* Altura ajustada da barra superior */
             display: flex;
@@ -55,7 +57,7 @@
         }
 
         .navbar a:hover {
-            background-color: #4a235a; /* Cor do botão ao passar o mouse */
+            background-color: #273570; /* Cor do botão ao passar o mouse */
         }
 
         .content {
@@ -87,20 +89,21 @@
         .login-container h1 {
             text-align: center;
             margin-bottom: 20px;
-            color: #6c3483; /* Cor do título "Login" */
+            color: #090D1F; /* Cor do título "Login" */
             font-family: 'Oswald', sans-serif; /* Aplica Oswald Medium ao título "Login" */
         }
 
         .login-container label {
             display: block;
             margin-bottom: 8px;
+
         }
 
         .login-container input[type="text"],
         .login-container input[type="password"] {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             border: 1px solid #ccc;
             border-radius: 3px;
         }
@@ -108,7 +111,7 @@
         .login-container input[type="submit"] {
             width: 100%;
             padding: 10px;
-            background-color: #6c3483; /* Cor do botão de login */
+            background-color: #090D1F; /* Cor do botão de login */
             color: white;
             border: none;
             border-radius: 3px;
@@ -117,7 +120,7 @@
         }
 
         .login-container input[type="submit"]:hover {
-            background-color: #5b2d77; /* Cor ao passar o mouse no botão */
+            background-color: #273570; /* Cor ao passar o mouse no botão */
         }
     </style>
 </head>

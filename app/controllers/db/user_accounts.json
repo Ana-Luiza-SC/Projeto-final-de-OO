@@ -11,14 +11,14 @@
         "username": "Ana",
         "password": "1",
         "name": "Ana Luiza",
-        "age": "35",
+        "age": "33",
         "email": "ana@exemplo.com",
         "type": "adm"
     },
     {
         "username": "Vilmar",
         "password": "2",
-        "name": "Vilmar Jos\u00c3\u00a9",
+        "name": "Vilmar JosÃ©",
         "age": "20",
         "email": "vilmar@exemplo.com",
         "type": "adm"
