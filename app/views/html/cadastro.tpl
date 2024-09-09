@@ -10,7 +10,7 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background-color: #101733;
         }
 
         .navbar {
@@ -18,7 +18,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #6c3483;
+            background-color: #090D1F;
             color: white;
             height: 50px;
             display: flex;
@@ -55,7 +55,7 @@
         }
 
         .navbar a:hover {
-            background-color: #4a235a;
+            background-color: #273570;
         }
 
         .content {
@@ -64,7 +64,7 @@
         }
 
         .content h2 {
-            color: #6c3483;
+            color: #090D1F;
         }
 
         .form-container {
@@ -73,7 +73,9 @@
             padding: 20px;
             background-color: #ffffff;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-collapse: collapse
+            width: 100%
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
@@ -94,7 +96,7 @@
         }
 
         .form-group input[type="submit"] {
-            background-color: #6c3483;
+            background-color: #090D1F;
             color: white;
             border: none;
             cursor: pointer;
@@ -102,7 +104,7 @@
         }
 
         .form-group input[type="submit"]:hover {
-            background-color: #4a235a;
+            background-color: #273570;
         }
 
         .error {

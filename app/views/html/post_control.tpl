@@ -10,7 +10,7 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f3e5f5;
+            background-color: #101733;
         }
 
         .navbar {
@@ -18,7 +18,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #6c3483; /* Cor da barra superior */
+            background-color: #090D1F; /* Cor da barra superior */
             color: white;
             height: 50px; /* Altura da barra superior */
             display: flex;
@@ -55,7 +55,7 @@
         }
 
         .navbar a:hover {
-            background-color: #4a235a; 
+            background-color: #273570; 
         }
 
         .content {
@@ -64,14 +64,14 @@
         }
 
         .content h1 {
-            color: #4a235a;
+            color: #FFFFFF;
             font-size: 24px;
             margin-bottom: 20px;
             font-family: 'Oswald', sans-serif;
         }
 
         .content h2 {
-            color: #4a235a;
+            color: #FFFFFF;
             font-size: 22px;
             margin-bottom: 10px;
             font-family: 'Oswald', sans-serif;
@@ -92,14 +92,14 @@
         }
 
         th {
-            background-color: #6c3483;
+            background-color: #090D1F;
             color: white;
             font-family: 'Oswald', sans-serif;
         }
 
         td button {
             padding: 5px 10px;
-            background-color: #6c3483;
+            background-color: #090D1F;
             color: white;
             border: none;
             border-radius: 5px;
@@ -109,7 +109,7 @@
         }
 
         td button:hover {
-            background-color: #4a235a;
+            background-color: #273570;
         }
 
         form {
@@ -129,14 +129,14 @@
         }
 
         form button {
-            background-color: #6c3483;
+            background-color: #090D1F;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
         form button:hover {
-            background-color: #4a235a;
+            background-color: #273570;
         }
 
         .edit-form {

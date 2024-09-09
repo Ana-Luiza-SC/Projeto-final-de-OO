@@ -10,7 +10,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #090D1F
+            background-color: #101733
             height: 100vh;
             margin: 0;
             padding: 0;

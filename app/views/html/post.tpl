@@ -10,7 +10,7 @@
             font-family: 'Roboto', sans-serif; /* Aplica Roboto Bold ao corpo */
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background-color: #101733;
         }
 
         .navbar {
@@ -18,7 +18,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #6c3483; /* Cor da barra superior */
+            background-color: #090D1F; /* Cor da barra superior */
             color: white;
             height: 50px; /* Altura da barra superior */
             display: flex;
@@ -55,7 +55,7 @@
         }
 
         .navbar a:hover {
-            background-color: #4a235a; 
+            background-color: #273570; 
         }
 
         .content {
@@ -64,7 +64,7 @@
         }
 
         .content h2 {
-            color: #6c3483;
+            color: #090D1F;
         }
 
         .form-container {
@@ -99,7 +99,7 @@
         }
 
         .form-group input[type="submit"] {
-            background-color: #6c3483;
+            background-color: #090D1F;
             color: white;
             border: none;
             cursor: pointer;
@@ -107,7 +107,7 @@
         }
 
         .form-group input[type="submit"]:hover {
-            background-color: #4a235a;
+            background-color: #273570;
         }
 
         form {
@@ -127,14 +127,14 @@
         }
 
         form button {
-            background-color: #6c3483;
+            background-color: #090D1F;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
         form button:hover {
-            background-color: #4a235a;
+            background-color: #273570;
         }
 
         .edit-form {
