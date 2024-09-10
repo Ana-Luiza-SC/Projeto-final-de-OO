@@ -10,7 +10,7 @@
             font-family: 'Roboto', sans-serif; /* Aplica Roboto Bold ao corpo */
             margin: 0;
             padding: 0;
-            background-color: #101733;
+            background-color: #090D1F;
         }
 
         .navbar {
@@ -140,6 +140,36 @@
         .edit-form {
             display: none; /* Começa oculto */
         }
+
+        .redirect-link {
+            color: #ffffff; /* Cor do texto do link */
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #090D1F; /* Fundo do link */
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+        }
+
+        .redirect-link:hover {
+            background-color: #273570;
+            color: white;
+        }
+        .not-transferred-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Ocupa toda a altura da janela */
+        }
+        .not-transferred-container h2 {
+            color: #FFFFFF; /* Cor branca para o texto do h2 */
+        }
+
     </style>
 </head>
 <body>
@@ -148,10 +178,12 @@
             <tr>
                 <td class="left"><h1>Área do Usuário</h1></td>
                 <td class="right" align="right">
+                    %if transfered:
                     <a href="/blog">Blog</a>
+                    <a href="/pagina">Área do usuário</a>
+                    %end
                     % if current_user is not None and current_user.type == "adm":
                         <a href="/area_adm">Área do administrador</a>
-                        <a href="/post">Criar Post</a>
                         <a href="/post_adm">Controle dos Posts</a>
                     %end
                 </td>
@@ -162,10 +194,12 @@
     <div class="content">
         %if not transfered:
             <h2>Houve erro no login do usuário</h2>
-            <a href="/portal">Faça seu login</a>
+            <a href="/portal" class="redirect-link">Faça seu login</a>
         
         %elif current_user.type != "adm":
-            <h2>Você não tem permissão para criar posts. Volte para a <a href="/pagina">Página de Usuário</a></h2>
+            <h2>Você não tem acesso à essa página, volte para as seguintes páginas</h2>
+            <a href="/pagina" class="redirect-link">Área do usuário</a>
+            <a href="/blog" class="redirect-link">Área dos Blogs</a>
         
         %else:
             <div class="form-container">

@@ -10,7 +10,7 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #101733;
+            background-color: #090D1F;
         }
 
         .navbar {

@@ -10,11 +10,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #101733
+            background-color: #090D1F; /* antiga cor: #101733*/
             height: 100vh;
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif; /* Aplica Roboto Bold ao corpo */
+            font-family: 'Roboto', sans-serif;
         }
 
         .navbar {
@@ -22,9 +22,9 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #090D1F; /* Cor da barra superior */
+            background-color: #090D1F;
             color: white;
-            height: 50px; /* Altura ajustada da barra superior */
+            height: 50px;
             display: flex;
             align-items: center;
             font-family: 'Oswald', sans-serif;
@@ -42,26 +42,26 @@
 
         .navbar h2 {
             margin: 0;
-            font-size: 20px; /* Tamanho da fonte ajustado */
+            font-size: 20px;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
-            padding: 10px 20px; /* Padding ajustado */
+            padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s;
             display: inline-block;
-            line-height: 30px; /* Alinhamento vertical ajustado */
-            font-size: 16px; /* Tamanho da fonte do botão ajustado */
+            line-height: 30px;
+            font-size: 16px;
         }
 
         .navbar a:hover {
-            background-color: #273570; /* Cor do botão ao passar o mouse */
+            background-color: #273570;
         }
 
         .content {
-            padding-top: 60px; /* Para evitar que o conteúdo fique sob a navbar */
+            padding-top: 60px;
             text-align: center;
             margin-top: 100px;
         }
@@ -89,14 +89,13 @@
         .login-container h1 {
             text-align: center;
             margin-bottom: 20px;
-            color: #090D1F; /* Cor do título "Login" */
-            font-family: 'Oswald', sans-serif; /* Aplica Oswald Medium ao título "Login" */
+            color: #090D1F;
+            font-family: 'Oswald', sans-serif;
         }
 
         .login-container label {
             display: block;
             margin-bottom: 8px;
-
         }
 
         .login-container input[type="text"],
@@ -111,16 +110,39 @@
         .login-container input[type="submit"] {
             width: 100%;
             padding: 10px;
-            background-color: #090D1F; /* Cor do botão de login */
+            background-color: #090D1F;
             color: white;
             border: none;
             border-radius: 3px;
             cursor: pointer;
-            font-family: 'Oswald', sans-serif; /* Aplica Oswald Medium ao botão de login */
+            font-family: 'Oswald', sans-serif;
         }
 
         .login-container input[type="submit"]:hover {
-            background-color: #273570; /* Cor ao passar o mouse no botão */
+            background-color: #273570;
+        }
+
+        /* Estilização para os botões de editar e excluir */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #090D1F;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+
+        .button-container a:hover {
+            background-color: #4a235a;
         }
     </style>
 </head>

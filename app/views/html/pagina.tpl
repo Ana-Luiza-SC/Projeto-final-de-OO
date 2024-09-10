@@ -7,10 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif; /* Aplica Roboto Bold ao corpo */
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background-color: #090D1F; /* Cor de fundo escura */
+            color: #C0C5D0; /* Cor do texto */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .navbar {
@@ -18,14 +23,14 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #090D1F; /* Cor da barra superior */
+            background-color: #090D1F; /* Cor da navbar igual ao fundo */
             color: white;
-            height: 50px; /* Altura da barra superior */
+            height: 50px;
             display: flex;
             align-items: center;
             font-family: 'Oswald', sans-serif;
             padding: 0 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .navbar table {
@@ -36,11 +41,12 @@
         .navbar td {
             vertical-align: middle;
             padding: 0 20px;
+            border: none;
         }
 
         .navbar h1 {
             margin: 0;
-            font-size: 20px; /* Tamanho da fonte ajustado */
+            font-size: 20px;
         }
 
         .navbar a {
@@ -50,73 +56,83 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             display: inline-block;
-            line-height: 30px; /* Alinhamento vertical ajustado */
-            font-size: 16px; /* Tamanho da fonte do botão ajustado */
+            line-height: 30px;
+            font-size: 16px;
         }
 
         .navbar a:hover {
-            background-color: #273570; 
-        }
-
-        .content {
-            padding-top: 100px; 
-            text-align: center;
-        }
-
-        .content h2 {
-            color: #090D1F;
-        }
-
-        .content p {
-            font-size: 18px;
-            color: #666;
-        }
-
-        .button-center {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        /* Estiliza o botão */
-        .button-center button {
-            padding: 10px 20px;
-            background-color: #090D1F;
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            font-family: 'Roboto', sans-serif; 
-            font-size: 16px; 
-            cursor: pointer; 
-            transition: background-color 0.3s; 
-        }
-
-        .button-center button:hover {
             background-color: #273570;
         }
 
-        .table_users {
-            width: 80%;
-            margin: 0 auto 20px auto;
-            border-collapse: collapse;
-            background-color: #fff;
+        .user-container {
+            background-color: white; /* Fundo branco para o contêiner principal */
+            border: 1px solid #ccc;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .user-container h2 {
+            color: #090D1F;
+            font-family: 'Oswald', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .user-container p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container a, .button-container button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #090D1F;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button-container a:hover, .button-container button:hover {
+            background-color: #273570;
+        }
+
+        .edit-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white; /* Fundo branco */
+            border: 1px solid #ccc;
+            border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        th, td {
+        .edit-form input {
+            width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
         }
 
-        th {
-            background-color: #6c3483;
-            color: white;
-            font-family: 'Oswald', sans-serif;
-        }
-
-        td button {
-            padding: 5px 10px;
-            background-color: #6c3483;
+        .edit-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #090D1F;
             color: white;
             border: none;
             border-radius: 5px;
@@ -125,40 +141,28 @@
             transition: background-color 0.3s;
         }
 
-        td button:hover {
-            background-color: #4a235a;
+        .edit-form button:hover {
+            background-color: #273570;
         }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        form input, form select, form button {
-            width: 200px;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
+        .redirect-link {
+            color: white; /* Cor do texto do link */
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #090D1F; /* Fundo branco */
+            border: none;
             border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+            margin-top: 20px;
             font-family: 'Roboto', sans-serif;
+            font-size: 16px;
         }
 
-        form button {
-            background-color: #6c3483;
+        .redirect-link:hover {
+            background-color: #273570;
             color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
         }
 
-        form button:hover {
-            background-color: #4a235a;
-        }
-
-        .edit-form {
-            display: none; /* Começa oculto */
-        }
     </style>
 </head>
 <body>
@@ -168,7 +172,9 @@
             <tr>
                 <td class="left"><h1>Área do Usuário</h1></td>
                 <td class="right" align="right">
+                %if transfered:
                     <a href="/blog">Blog</a>
+                %end
                     % if current_user is not None and current_user.type == "adm":
                         <a href="/area_adm">Área do administrador</a>
                         <a href="/post">Criar Post</a>
@@ -179,47 +185,38 @@
         </table>
     </div>
 
-    <div class="content">
+    <div class="user-container">
         % if transfered:
             <h2>Dados do Usuário:</h2>
             <p>Username: {{current_user.username}}</p>
             <p>Nome: {{current_user.name}}</p>
             <p>Idade: {{current_user.age}}</p>
             <p>Email: {{current_user.email}}</p>
-            <form class="button-center" action="/logout" method="post">
-                <button type="submit">Sair</button>
-            </form>
+            <div class="button-container">
+                <button type="button" onclick="toggleEditForm('{{ current_user.username }}')">Editar</button>
+                <form action="/user_delete_user/{{ current_user.username }}" method="POST" style="display:inline;">
+                    <button type="submit">Excluir</button>
+                </form>
+                <form action="/logout" method="post" style="display:inline;">
+                    <button type="submit">Sair</button>
+                </form>
+            </div>
 
-            <h2>Gerenciar Usuário</h2>
-            <table class="table_users">
-                        <!-- Botão para exibir o formulário de edição -->
-                        <button type="button" onclick="toggleEditForm('{{ current_user.username }}')">Editar</button>
-
-                    <!-- Formulário de edição -->
-                    <div id="edit-form-{{ current_user.username }}" class="edit-form">
-                        <form class="button-center" action="/user_edit_user/{{ current_user.username }}" method="POST">
-                            <input type="text" name="name" value="{{ current_user.name }}" placeholder="Nome" required>
-                            <input type="number" name="age" value="{{ current_user.age }}" placeholder="Idade" required>
-                            <input type="email" name="email" value="{{ current_user.email }}" placeholder="Email" required>
-                            <input type="password" name="password" placeholder="Nova Senha (opcional)">
-                            <button type="submit">Salvar</button>
-                        </form>
-                    </div>
-
-
-                        <!-- Formulário de exclusão -->
-                        <form class="button-center" action="/user_delete_user/{{ current_user.username }}" method="POST" style="display:inline;">
-                            <button type="submit">Excluir</button>
-                        </form>
-
-                    </td>
-                </tr>
-            </table>
+            <div id="edit-form-{{ current_user.username }}" class="edit-form">
+                <form action="/user_edit_user/{{ current_user.username }}" method="POST">
+                    <input type="text" name="name" value="{{ current_user.name }}" placeholder="Nome" required>
+                    <input type="number" name="age" value="{{ current_user.age }}" placeholder="Idade" required>
+                    <input type="email" name="email" value="{{ current_user.email }}" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Nova Senha (opcional)">
+                    <button type="submit">Salvar</button>
+                </form>
+            </div>
 
         % else:
             <h2>Houve um erro no login ou você não está autenticado.</h2>
-            <a href="/portal">Faça seu login</a>
+            <a href="/portal" class="redirect-link">Faça seu login</a>
         % end
+
     </div>
 
     <script>

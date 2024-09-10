@@ -119,6 +119,60 @@
         .content a:hover {
             background-color: #4a235a;
         }
+
+        .post-container {
+            background-color: #0e132b;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Define uma largura máxima para a caixa */
+            margin-left: auto;
+            margin-right: auto;
+            border: none;
+        }
+
+        .post-container h3 {
+            color: white; /* Cor do título dentro da caixa */
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .post-container p {
+            color: #dcdde1; /* Cor do texto dentro da caixa */
+        }
+
+        .redirect-link {
+            color: #ffffff; /* Cor do texto do link */
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #090D1F; /* Fundo do link */
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+        }
+
+        .redirect-link:hover {
+            background-color: #273570;
+            color: white;
+        }
+
+        /* Centralizar conteúdo não transferido */
+        .not-transferred-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color = white;
+        }
+        .not-transferred-container h2 {
+        color: #FFFFFF; /* Cor branca para o texto do h2 */
+    }
     </style>
 </head>
 <body>
@@ -128,41 +182,48 @@
             <tr>
                 <td class="left"><h1>Área do Usuário</h1></td>
                 <td class="right" align="right">
-                    <a href="/pagina">Área do usuário</a>
+                    %if transfered:
+                        <a href="/pagina">Área do usuário</a>
+                    %end
                     % if current_user is not None and current_user.type == "adm":
                         <a href="/area_adm">Área do administrador</a>
                         <a href="/post">Criar Post</a>
                         <a href="/post_adm">Controle dos Posts</a>
-                    % end
+                    %end
                 </td>
             </tr>
         </table>
     </div>
 
+     % if transfered == True:
+
     <!-- Título principal -->
     <div class="top">
-        <h1>Guia de estudos</h1>
+        <h2>Guia de estudos</h2>
+                    % if current_user.type == "adm":
+                <h4>Você é um administrador</h4>
+            % end
     </div>
 
-    <!-- Conteúdo dos posts -->
-    <div class="content">
-        % if transfered == True: 
-            % if current_user.type == "adm":
-                <h2>Você é um administrador</h2>
-            % end
-
-            <article>
-                % for post in current_post:
+    <div class="content"> 
+        <article>
+            % for post in current_post:
+                <div class="post-container">
                     <h3>{{ post['titulo'] }}</h3>  <!-- Acessando a chave 'titulo' de um dicionário -->
                     <p>{{ post['conteudo'] }}</p>
                     <p>Autor: {{ post['autor']['name'] }}</p>
                     <p>Data: {{ post['data'] }}</p>
-                % end
-            </article>
-        % else: 
-            <h2>Houve erro no login do usuário</h2>
-            <a href="/portal">Faça seu login</a>
-        % end
+                </div>
+            % end
+        </article>
     </div>
+    
+    % else:
+    <div class="not-transferred-container">
+        <h2>Houve erro no login do usuário</h2>
+        <a href="/portal" class="redirect-link">Faça seu login</a>
+    </div>
+    % end
+
 </body>
 </html>
