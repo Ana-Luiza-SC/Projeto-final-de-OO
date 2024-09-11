@@ -35,7 +35,7 @@
             "type": "adm"
         },
         "titulo": "Tomara que funcione",
-        "conteudo": "Vai funcionar sim, AMÃM",
+        "conteudo": "Vai funcionar sim, amÃ©m",
         "data": "2024-09-03"
     },
     {
@@ -50,5 +50,18 @@
         "titulo": "5 motivos que eu sou gay",
         "conteudo": "VÃ¡rios, por motivos de sem ter tempos, n vou  falar",
         "data": "2024-09-03"
+    },
+    {
+        "autor": {
+            "username": "Ana",
+            "password": "1",
+            "name": "Ana Luiza",
+            "age": "33",
+            "email": "ana@exemplo.com",
+            "type": "adm"
+        },
+        "titulo": "aaa",
+        "conteudo": "ááá\r\n",
+        "data": "2024-09-11"
     }
 ]

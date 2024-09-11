@@ -24,24 +24,26 @@ def helper():
 
 @app.route('/pagina', methods=['GET'])
 def action_pagina(username=None):
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.render('pagina')
 
 @app.route('/portal', method='GET')
 def login():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.render('portal')
 
 @app.route('/portal', method='POST')
 def action_portal():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     username = request.forms.get('username')
+    username_corrigido = username.encode('latin-1').decode('utf-8')
     password = request.forms.get('password')
-    auth_result = ctl.authenticate_user(username, password)
+    password_corrigido = password.encode('latin-1').decode('utf-8')
+    auth_result = ctl.authenticate_user(username_corrigido, password_corrigido)
     
     if auth_result is not None:
-        response.content_type = 'text/html; charset=utf-8'
-        session_id, username = auth_result
+        #response.content_type = 'text/html; charset=utf-8'
+        session_id, username_corrigido = auth_result
         response.set_cookie('session_id', session_id, httponly=True, secure=True, max_age=3600)
         redirect('/blog')
     else:
@@ -49,7 +51,7 @@ def action_portal():
 
 @app.route('/logout', method='POST')
 def logout():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     session_id = request.get_cookie("session_id")
     if session_id:
         ctl.logout_user()
@@ -58,68 +60,75 @@ def logout():
 
 @app.route('/', method=['GET', 'POST'])
 def inicio():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.render('inicio')
 
 @app.route('/blog', method=['GET', 'POST'])
 def blog():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.render('blog')
 
 # ---------- User Registration --------------------------------------------------
 
 @app.route('/cadastro', method='GET')
 def cadastro():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.render('cadastro')
 
 @app.route('/cadastro', method='POST')
 def action_cadastro():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     username = request.forms.get('username')
+    username_corrigido = username.encode('latin-1').decode('utf-8')
     password = request.forms.get('password')
+    password_corrigido = password.encode('latin-1').decode('utf-8')
     name = request.forms.get('name')
+    name_corrigido = name.encode('latin-1').decode('utf-8')
     age = request.forms.get('age')
+    age_corrigido = age.encode('latin-1').decode('utf-8')
     email = request.forms.get('email')
+    email_corrigido = email.encode('latin-1').decode('utf-8')
     
-    ctl.action_book(username, password, name, age, email)
+    ctl.action_book(username_corrigido, password_corrigido, name_corrigido, age_corrigido, email_corrigido)
     return redirect('/portal')
 
 # ---------- Post Management ---------------------------------------------------
 
 @app.route('/post', method='GET')
 def area_post():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.render('post')
 
 @app.route('/novo_post', method='POST')
 def action_novo_post():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     titulo = request.forms.get('Titulo')
+    titulo_corrigido = titulo.encode('latin-1').decode('utf-8')
     conteudo = request.forms.get('Conteudo')
+    conteudo_corrigido = conteudo.encode('latin-1').decode('utf-8')
     data = date.today().strftime('%Y-%m-%d')
     
-    ctl.action_post(titulo, conteudo, data)
+    ctl.action_post(titulo_corrigido, conteudo_corrigido, data)
     return redirect('/blog')
 
 
 @app.route('/post_adm', method='GET')
 def post_control():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.post_control()  # Chama o método correto para exibir a página de controle dos posts
 
 @app.route('/delete_post/<post_title>', method='POST')
 def delete_post(post_title):
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     ctl.delete_post(post_title)
     return redirect('/post_adm')
 
 @app.route('/edit_post/<post_title>', method='POST')
 def edit_post(post_title):
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     new_data = {
-        'title': request.forms.get('title'),
-        'content': request.forms.get('content')
+        'titulo': request.forms.get('titulo'),
+        'conteudo': request.forms.get('conteudo')
     }
     return ctl.edit_post(post_title, new_data)  # Passa o título e new_data como argumento
 
@@ -127,23 +136,28 @@ def edit_post(post_title):
 
 @app.route('/area_adm', method=['GET', 'POST'])
 def administrador():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.administrador()
 
 @app.route('/add_user', method='POST')
 def add_user():
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     username = request.forms.get('username')
+    username_corrigido = username.encode('latin-1').decode('utf-8')
     password = request.forms.get('password')
+    password_corrigido = password.encode('latin-1').decode('utf-8')
     name = request.forms.get('name')
+    name_corrigido = name.encode('latin-1').decode('utf-8')
     age = request.forms.get('age')
+    age_corrigido = age.encode('latin-1').decode('utf-8')
     email = request.forms.get('email')
+    email_corrigido = email.encode('latin-1').decode('utf-8')
     user_type = request.forms.get('type')
-    return ctl.add_user(username, password, name, age, email, user_type)
+    return ctl.add_user(username_corrigido, password_corrigido, name_corrigido, age_corrigido, email_corrigido, user_type)
 
 @app.route('/edit_user/<username>', method='POST')
 def edit_user(username):
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     new_data = {
         'password': request.forms.get('password'),
         'name': request.forms.get('name'),
@@ -155,12 +169,12 @@ def edit_user(username):
 
 @app.route('/delete_user/<username>', method='POST')
 def delete_user(username):
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.delete_user(username)
 
 @app.route('/user_edit_user/<username>', method='POST')
 def edit_user(username):
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     new_data = {
         'password': request.forms.get('password'),
         'name': request.forms.get('name'),
@@ -173,7 +187,7 @@ def edit_user(username):
 
 @app.route('/user_delete_user/<username>', method='POST')
 def delete_user(username):
-    response.content_type = 'text/html; charset=utf-8'
+    #response.content_type = 'text/html; charset=utf-8'
     return ctl.user_delete_user(username)
 
 
