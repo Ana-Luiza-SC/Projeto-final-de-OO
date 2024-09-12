@@ -172,5 +172,7 @@ def delete_user(username):
     #response.content_type = 'text/html; charset=utf-8'
     return ctl.delete_user(username)
 
-if __name__ == 'main':
-    app.run(host='0.0.0.0', port=8080)
+if __name__ == '__main__':
+    app.run(host='localhost', port=8080, debug=True)
+    #app.run(host='0.0.0.0', port=8080)
+    
