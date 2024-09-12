@@ -264,6 +264,7 @@
                                 <div id="edit-form-{{ user.username }}" class="edit-form">
                                     <form action="/edit_user/{{ user.username }}" method="POST">
                                         <input type="text" name="name" value="{{ user.name }}" placeholder="Nome" required>
+                                        <input type="text" name="password" value="{{ user.password }}" placeholder="Senha" required>
                                         <input type="number" name="age" value="{{ user.age }}" placeholder="Idade" required>
                                         <input type="email" name="email" value="{{ user.email }}" placeholder="Email" required>
                                         <select name="type" required>

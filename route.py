@@ -1,13 +1,13 @@
 from bottle import Bottle, request, redirect, response, template, static_file
 from app.controllers.application import Application
 from datetime import date
-import re 
+#import re 
 
 app = Bottle()
 ctl = Application()
 
-def sanitize_string(s):
-    return re.sub(r'[^\w-]', '', s.replace(' ', '_'))
+#def sanitize_string(s):
+    #return re.sub(r'[^\w-]', '', s.replace(' ', '_'))
     
 # Serve static files from the 'app/static' directory
 @app.route('/static/<filepath:path>')
@@ -127,8 +127,8 @@ def delete_post(post_title):
 def edit_post(post_title):
     #response.content_type = 'text/html; charset=utf-8'
     new_data = {
-        'titulo': request.forms.get('titulo'),
-        'conteudo': request.forms.get('conteudo')
+        'titulo': str(request.forms.get('titulo')).encode('latin-1').decode('utf-8'),
+        'conteudo': str(request.forms.get('conteudo')).encode('latin-1').decode('utf-8')
     }
     return ctl.edit_post(post_title, new_data)  # Passa o título e new_data como argumento
 
@@ -159,11 +159,11 @@ def add_user():
 def edit_user(username):
     #response.content_type = 'text/html; charset=utf-8'
     new_data = {
-        'password': request.forms.get('password'),
-        'name': request.forms.get('name'),
-        'age': request.forms.get('age'),
-        'email': request.forms.get('email'),
-        'type': request.forms.get('type')
+        'password': str(request.forms.get('password')).encode('latin-1').decode('utf-8'),
+        'name': str(request.forms.get('name')).encode('latin-1').decode('utf-8'),
+        'age': str(request.forms.get('age')).encode('latin-1').decode('utf-8'),
+        'email': str(request.forms.get('email')).encode('latin-1').decode('utf-8'),
+        'type': str(request.forms.get('type')).encode('latin-1').decode('utf-8')
     }
     return ctl.edit_user(username, new_data)
 
@@ -171,25 +171,6 @@ def edit_user(username):
 def delete_user(username):
     #response.content_type = 'text/html; charset=utf-8'
     return ctl.delete_user(username)
-
-@app.route('/user_edit_user/<username>', method='POST')
-def edit_user(username):
-    #response.content_type = 'text/html; charset=utf-8'
-    new_data = {
-        'password': request.forms.get('password'),
-        'name': request.forms.get('name'),
-        'age': request.forms.get('age'),
-        'email': request.forms.get('email'),
-        'type': request.forms.get('type')
-    }
-    return ctl.user_edit_user(username, new_data)
-
-
-@app.route('/user_delete_user/<username>', method='POST')
-def delete_user(username):
-    #response.content_type = 'text/html; charset=utf-8'
-    return ctl.user_delete_user(username)
-
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)

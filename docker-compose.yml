@@ -1,0 +1,15 @@
+services:
+  bottle-app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
