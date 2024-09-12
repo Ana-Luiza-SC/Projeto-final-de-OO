@@ -263,6 +263,7 @@
                                 <!-- Formulário de edição -->
                                 <div id="edit-form-{{ user.username }}" class="edit-form">
                                     <form action="/edit_user/{{ user.username }}" method="POST">
+                                        <input type="text" name="username" value="{{ user.username }}" placeholder="Username" required>
                                         <input type="text" name="name" value="{{ user.name }}" placeholder="Nome" required>
                                         <input type="text" name="password" value="{{ user.password }}" placeholder="Senha" required>
                                         <input type="number" name="age" value="{{ user.age }}" placeholder="Idade" required>

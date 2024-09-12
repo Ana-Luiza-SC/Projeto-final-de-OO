@@ -79,6 +79,7 @@ class DataRecord:
                 if 'password' in new_data and new_data['password']:
                     user.password = new_data['password']
                 # Atualiza os demais dados
+                user.username = new_data.get('username', user.username)
                 user.name = new_data.get('name', user.name)
                 user.age = new_data.get('age', user.age)
                 user.email = new_data.get('email', user.email)
@@ -146,6 +147,7 @@ class Post:
         
         for post_data in self.posts_Blog:
             if post_data.titulo == titulo:
+                post_data.titulo = novos_dados.get('titulo', post_data.titulo)
                 post_data.autor = novos_dados.get('autor', post_data.autor) # Atualiza os dados do post
                 post_data.conteudo = novos_dados.get('conteudo', post_data.conteudo)
                 post_data.data = novos_dados.get('data', post_data.data)

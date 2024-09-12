@@ -204,6 +204,7 @@
 
             <div id="edit-form-{{ current_user.username }}" class="edit-form">
                 <form action="/user_edit_user/{{ current_user.username }}" method="POST">
+                <input type="text" name="username" value="{{ current_user.username }}" placeholder="Username" required>
                     <input type="text" name="name" value="{{ current_user.name }}" placeholder="Nome" required>
                     <input type="number" name="age" value="{{ current_user.age }}" placeholder="Idade" required>
                     <input type="email" name="email" value="{{ current_user.email }}" placeholder="Email" required>

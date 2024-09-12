@@ -1,8 +1,8 @@
 [
     {
-        "username": "Moura",
+        "username": "Mourá",
         "password": "456789",
-        "name": "Henrique",
+        "name": "Henrique.",
         "age": "7",
         "email": "sem@email.com",
         "type": "adm"
@@ -19,9 +19,9 @@
         "username": "Henrique",
         "password": "123456",
         "name": "Henrique",
-        "age": "45",
+        "age": "43",
         "email": "exemplo@exemplo.com",
-        "type": "user"
+        "type": "None"
     },
     {
         "username": "Vilmar",
@@ -30,5 +30,13 @@
         "age": "33",
         "email": "aa@a",
         "type": "adm"
+    },
+    {
+        "username": "Vilbs",
+        "password": "1",
+        "name": "Vilbs",
+        "age": "33",
+        "email": "vilmar160176@gmail.com",
+        "type": "user"
     }
 ]

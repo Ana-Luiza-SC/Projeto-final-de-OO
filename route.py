@@ -159,6 +159,7 @@ def add_user():
 def edit_user(username):
     #response.content_type = 'text/html; charset=utf-8'
     new_data = {
+        'username': str(request.forms.get('username')).encode('latin-1').decode('utf-8'),
         'password': str(request.forms.get('password')).encode('latin-1').decode('utf-8'),
         'name': str(request.forms.get('name')).encode('latin-1').decode('utf-8'),
         'age': str(request.forms.get('age')).encode('latin-1').decode('utf-8'),
@@ -171,6 +172,18 @@ def edit_user(username):
 def delete_user(username):
     #response.content_type = 'text/html; charset=utf-8'
     return ctl.delete_user(username)
+
+@app.route('/user_edit_user/<username>', method='POST')
+def user_edit_user(username):
+    new_data = {
+        'username': str(request.forms.get('username')).encode('latin-1').decode('utf-8'),
+        'password': str(request.forms.get('password')).encode('latin-1').decode('utf-8'),
+        'name': str(request.forms.get('name')).encode('latin-1').decode('utf-8'),
+        'age': str(request.forms.get('age')).encode('latin-1').decode('utf-8'),
+        'email': str(request.forms.get('email')).encode('latin-1').decode('utf-8'),
+        'type': str(request.forms.get('type')).encode('latin-1').decode('utf-8')
+    }
+    return ctl.user_edit_user(username, new_data)
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
