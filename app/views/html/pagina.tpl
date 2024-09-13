@@ -163,6 +163,10 @@
             color: white;
         }
 
+        .hidden-field {
+    display: none;
+}
+
     </style>
 </head>
 <body>
@@ -208,6 +212,7 @@
                     <input type="text" name="name" value="{{ current_user.name }}" placeholder="Nome" required>
                     <input type="number" name="age" value="{{ current_user.age }}" placeholder="Idade" required>
                     <input type="email" name="email" value="{{ current_user.email }}" placeholder="Email" required>
+                    <input type="text" name="type" value="{{ current_user.type }}" class="hidden-field" required>    
                     <input type="password" name="password" placeholder="Nova Senha (opcional)">
                     <button type="submit">Salvar</button>
                 </form>
