@@ -1,21 +1,19 @@
 FROM python:3.12-slim
 
-WORKDIR /bmvc
+WORKDIR /app
 
-COPY requirements.txt /bmvc
+COPY requirements.txt .
 
 # Atualize o pip e instale o Bottle
-RUN pip install --upgrade pip
-RUN pip install bottle
-RUN pip install datetime 
-RUN pip install requests  
+RUN pip install --no-cache-dir -r requirements.txt
 
 
 
-COPY . /bmvc
+COPY . .
 
 # Exponha a porta que o aplicativo usa
 EXPOSE 8080
 
 # Comando para executar a aplicação
-ENTRYPOINT /bin/bash -c "python3 route.py"
+#ENTRYPOINT /bin/bash -c "python3 route.py"
+ENTRYPOINT ["python3","route.py"]

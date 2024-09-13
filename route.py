@@ -186,5 +186,5 @@ def user_edit_user(username):
     return ctl.user_edit_user(username, new_data)
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=8080, debug=True)
-    #app.run(host='0.0.0.0', port=8080)
+    #app.run(host='localhost', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
