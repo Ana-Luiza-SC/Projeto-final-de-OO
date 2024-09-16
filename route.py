@@ -185,6 +185,11 @@ def user_edit_user(username):
     }
     return ctl.user_edit_user(username, new_data)
 
+@app.route('/user_delete_user/<username>', method='POST')
+def delete_user(username):
+    #response.content_type = 'text/html; charset=utf-8'
+    return ctl.user_delete_user(username)
+
 if __name__ == '__main__':
     #app.run(host='localhost', port=8080, debug=True)
     app.run(host='0.0.0.0', port=8080, debug=True)

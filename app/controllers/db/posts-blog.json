@@ -14,54 +14,28 @@
     },
     {
         "autor": {
-            "username": "jane_smith",
-            "password": "password456",
-            "name": "Jane Smith",
-            "age": 28,
-            "email": "jane.smith@example.com",
-            "type": "adm"
-        },
-        "titulo": "Postaáá",
-        "conteudo": "Este é o conteúdo do segundo post.",
-        "data": "2024-09-02T11:00:00"
-    },
-    {
-        "autor": {
             "username": "Ana",
             "password": "1",
-            "name": "Ana Luiza",
-            "age": "35",
+            "name": "Ana Luísa",
+            "age": "34",
             "email": "ana@exemplo.com",
             "type": "adm"
         },
-        "titulo": "Tomara que funcione",
-        "conteudo": "Vai funcionar sim, amém",
-        "data": "2024-09-03"
+        "titulo": "Segundo post",
+        "conteudo": "Este é o conteúdo do segundo post",
+        "data": "2024-09-14"
     },
     {
         "autor": {
             "username": "Vilmar",
-            "password": "2",
-            "name": "Vilmar JosÃ©",
-            "age": "20",
-            "email": "vilmar@exemplo.com",
-            "type": "adm"
-        },
-        "titulo": "5 motivos que eu sou gay",
-        "conteudo": "VÃÂ¡rios, por motivos de sem ter tempos, n vou  falar",
-        "data": "2024-09-03"
-    },
-    {
-        "autor": {
-            "username": "Ana",
             "password": "1",
-            "name": "Ana Luiza",
-            "age": "33",
-            "email": "ana@exemplo.com",
+            "name": "V",
+            "age": "10",
+            "email": "a@adm.com",
             "type": "adm"
         },
-        "titulo": "aaa",
-        "conteudo": "ááá",
-        "data": "2024-09-11"
+        "titulo": "Post do vilmar",
+        "conteudo": "vilmar",
+        "data": "2024-09-16"
     }
 ]

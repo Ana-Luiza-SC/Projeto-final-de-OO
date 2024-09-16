@@ -180,7 +180,6 @@
     <div class="navbar">
         <table>
             <tr>
-                <td class="left"><h1>Área do Usuário</h1></td>
                 <td class="right" align="right">
                     %if transfered:
                         <a href="/pagina">Área do usuário</a>

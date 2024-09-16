@@ -163,7 +163,7 @@
     <div class="login-container">
         <h1>Login</h1>
         <form action="/portal" method="post">
-            <label for="username">Nome:</label> 
+            <label for="username">Nome de usuário:</label> 
             <input id="username" name="username" type="text" required />
 
             <label for="password">Senha:</label>

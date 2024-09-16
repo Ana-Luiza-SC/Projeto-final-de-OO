@@ -105,6 +105,7 @@ class DataRecord:
 
     
 class Post:
+    """Banco de dados JSON para o recurso Posts"""
     def __init__(self):
         self.posts_Blog = []
         self.get_posts()
